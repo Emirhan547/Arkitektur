@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36401.2 d17.14
+VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arkitektur.Entity", "Arkitektur.Entity\Arkitektur.Entity.csproj", "{9182F684-82C3-4A28-8976-91E541E1E403}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arkitektur.DataAccess", "Arkitektur.DataAccess\Arkitektur.DataAccess.csproj", "{7E881CA2-A701-4169-AB17-5F2435F5256B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arkitektur.Business", "Arkitektur.Business\Arkitektur.Business.csproj", "{80B95C80-7EF6-43F2-8D38-E8E764BCA5B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7E881CA2-A701-4169-AB17-5F2435F5256B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E881CA2-A701-4169-AB17-5F2435F5256B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E881CA2-A701-4169-AB17-5F2435F5256B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80B95C80-7EF6-43F2-8D38-E8E764BCA5B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80B95C80-7EF6-43F2-8D38-E8E764BCA5B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80B95C80-7EF6-43F2-8D38-E8E764BCA5B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80B95C80-7EF6-43F2-8D38-E8E764BCA5B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
