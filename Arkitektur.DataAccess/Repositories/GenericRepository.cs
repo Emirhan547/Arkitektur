@@ -35,11 +35,11 @@ namespace Arkitektur.DataAccess.Repositories
         public IQueryable<TEntity> GetQueryable()
         {
             return _table;
-        }
+        }       
 
-        public async Task Update(TEntity entity)
+        public void Update(TEntity entity)
         {
-            _table.Update(entity);
+            _context.Update(entity);
         }
     }
 }

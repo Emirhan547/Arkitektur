@@ -47,7 +47,7 @@ namespace Arkitektur.Business.Services.AboutServices
             var about = await _aboutRepository.GetByIdAsync(id);
             if (about is null)
             {
-                return BaseResult<ResultAboutDto>.Fail("About Not Found"));
+                return BaseResult<ResultAboutDto>.Fail("About Not Found");
             }
             var mappedValue = about.Adapt<ResultAboutDto>();
             return BaseResult<ResultAboutDto>.Success(mappedValue);

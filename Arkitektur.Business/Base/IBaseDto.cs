@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Base
 {
-    public class BaseDto
+    public interface IBaseDto
     {
-        public int Id { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public int Id { get; init; }
+        public DateTime CreatedAt { get; init; }
+        public DateTime UpdatedAt { get; init; }
     }
 }

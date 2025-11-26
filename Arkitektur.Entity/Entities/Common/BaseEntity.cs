@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Arkitektur.Entity.Entities.Common
@@ -11,6 +12,7 @@ namespace Arkitektur.Entity.Entities.Common
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        [JsonIgnore]
         public bool IsDeleted { get; set; }
     }
 }

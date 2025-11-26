@@ -1,7 +1,9 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Base
@@ -10,7 +12,9 @@ namespace Arkitektur.Business.Base
     {
         public T? Data { get; set; }
         public IEnumerable<object> Errors { get; set; }
+        [JsonIgnore]
         public bool IsSuccessful =>Errors == null || !Errors.Any();
+        [JsonIgnore]
         public bool IsFailure => !IsSuccessful;
 
         public static BaseResult<T> Success(T? data)
@@ -24,6 +28,17 @@ namespace Arkitektur.Business.Base
         public static BaseResult<T> Fail(string errorMessage)
         {
             return new BaseResult<T> { Errors = new[] { new { ErrorMessage = errorMessage } } };
+        }
+        public static BaseResult<T> Fail(List<ValidationFailure> errorMessage)
+        {
+            IEnumerable<object> errors = (from error in errorMessage
+                                          select new
+                                          {
+                                              PropertyName=error.PropertyName,
+                                              ErrorMessage=error.ErrorMessage
+
+                                          }).ToList();
+            return new BaseResult<T> { Errors = errors  };
         }
     }
 }
