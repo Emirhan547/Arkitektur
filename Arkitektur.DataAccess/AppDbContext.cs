@@ -1,5 +1,6 @@
 ﻿using Arkitektur.Entity.Entities;
 using Arkitektur.Entity.Entities.Common;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.DataAccess
 {
-    public class AppDbContext(DbContextOptions options):DbContext(options)
+    public class AppDbContext(DbContextOptions options) : IdentityDbContext<AppUser, AppRole, int>(options)
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
-                if(typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
+                if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
                 {
                     modelBuilder.Entity(entityType.ClrType).HasQueryFilter(ConvertToDeleteFilter(entityType.ClrType));
                 }
@@ -25,9 +26,9 @@ namespace Arkitektur.DataAccess
         }
         private static LambdaExpression ConvertToDeleteFilter(Type type)
         {
-            var parameter=Expression.Parameter(type, "e");
+            var parameter = Expression.Parameter(type, "e");
             var property = Expression.Property(Expression.Convert(parameter, typeof(BaseEntity)), "IsDeleted");
-            var notDeleted=Expression.Not(property);
+            var notDeleted = Expression.Not(property);
             return Expression.Lambda(notDeleted, parameter);
         }
         public DbSet<About> Abouts { get; set; }

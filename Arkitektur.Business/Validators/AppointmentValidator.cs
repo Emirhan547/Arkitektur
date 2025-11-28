@@ -1,4 +1,5 @@
 ﻿using Arkitektur.Business.DTOs.AppointmentDtos;
+using Arkitektur.Entity.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Validators
 {
-    public class AppointmentValidator:AbstractValidator<CreateAppointmentDto>
+    public class AppointmentValidator:AbstractValidator<Appointment>
     {
         public AppointmentValidator()
         {

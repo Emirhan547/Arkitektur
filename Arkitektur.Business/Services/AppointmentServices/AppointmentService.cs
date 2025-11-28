@@ -26,7 +26,7 @@ namespace Arkitektur.Business.Services.AppointmentServices
             }
             await _repository.CreateAsync(appointment);
             var result= await _unitOfWork.SaveChangesAsync();
-            return result ? BaseResult<object>.Success() : BaseResult<object>.Fail("Create Failded)");
+            return result ? BaseResult<object>.Success(appointment) : BaseResult<object>.Fail("Create Failded)");
         }
 
         public async Task<BaseResult<object>> DeleteAsync(int id)

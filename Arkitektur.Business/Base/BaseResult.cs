@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,17 @@ namespace Arkitektur.Business.Base
 
                                           }).ToList();
             return new BaseResult<T> { Errors = errors  };
+        }
+        public static BaseResult<T> Fail(IEnumerable<IdentityError> errorMessage)
+        {
+            IEnumerable<object> errors = (from error in errorMessage
+                                          select new
+                                          {
+                                              PropertyName = error.Code,
+                                              ErrorMessage = error.Description
+
+                                          }).ToList();
+            return new BaseResult<T> { Errors = errors };
         }
     }
 }
