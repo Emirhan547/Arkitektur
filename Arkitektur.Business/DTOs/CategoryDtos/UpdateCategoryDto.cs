@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.DTOs.CategoryDtos
 {
-    public record UpdateCategoryDto(int Id,string CategoryName);
+    public record UpdateCategoryDto(int Id,string? CategoryName);
 
 }

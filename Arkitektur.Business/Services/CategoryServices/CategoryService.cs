@@ -41,12 +41,14 @@ namespace Arkitektur.Business.Services.CategoryServices
             return result ? BaseResult<object>.Success() : BaseResult<object>.Fail("Delete Failed");
         }
 
-        public Task<BaseResult<List<ResultCategoryDto>>> GetAllAsync()
+        public async Task<BaseResult<List<ResultCategoryDto>>> GetAllAsync()
         {
-           var categories= _repository.GetAllAsync();
-            var resultCategories= categories.Adapt<List<ResultCategoryDto>>();
-            return Task.FromResult(BaseResult<List<ResultCategoryDto>>.Success(resultCategories));
+            var categories = await _repository.GetAllAsync();
+            var mappedResult = categories.Adapt<List<ResultCategoryDto>>();
+            return BaseResult<List<ResultCategoryDto>>.Success(mappedResult);
         }
+
+
 
         public async Task<BaseResult<ResultCategoryDto>> GetByIdAsync(int id)
         {

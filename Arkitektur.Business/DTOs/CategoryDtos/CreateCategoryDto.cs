@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.DTOs.CategoryDtos
 {
-    public record CreateCategoryDto(string CategoryName);
+    public record CreateCategoryDto(string? CategoryName);
 }
