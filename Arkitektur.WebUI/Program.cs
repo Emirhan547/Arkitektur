@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddHttpClientServices(builder.Configuration);
+builder.Services.AddServiceRegistrationsExt(builder.Configuration);
 builder.Services.AddControllersWithViews( options=>
 {
     options.Filters.Add<ValidationExceptionFilter>();

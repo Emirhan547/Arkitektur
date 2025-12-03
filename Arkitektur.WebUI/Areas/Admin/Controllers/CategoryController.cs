@@ -22,13 +22,13 @@ namespace Arkitektur.WebUI.Areas.Admin.Controllers
              await _categoryService.CreateAsync(categoryDto); 
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> EditCategory(int id)
+        public async Task<IActionResult> UpdateCategory(int id)
         {
             var response = await _categoryService.GetByIdAsync(id);
             return View(response.Data);
         }
         [HttpPost]
-        public async Task<IActionResult> EditCategory(UpdateCategoryDto categoryDto)
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto categoryDto)
         {
             await _categoryService.UpdateAsync(categoryDto);
             return RedirectToAction("Index");

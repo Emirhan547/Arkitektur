@@ -1,0 +1,42 @@
+﻿@model UpdateAboutDto
+@{
+    ViewData["Title"] = "UpdateAbout";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Hakkımızda Güncelle</h3>
+<div class="card text-center">
+    <div class="card-header">
+        <h4>Hakkımızda Görseli</h4>
+    </div>
+    <div class="car-body">
+        <img src="/@Model.ImageUrl" style="height:75px;width:75px" alt="Hakkımızda Görseli" />
+    </div>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden"asp-for="Id"/>
+    <input type="hidden"asp-for="ImageUrl"/>
+    <div class="form-group">
+        <label for="Title">Hakkımızda Görselini değiştirmek için yeni dosya seçebilirsiniz</label>
+        <input type="file" asp-for="File" class="form-control" />
+        <span class="text-danger" asp-validation-for="File"></span>
+    </div>
+    <div class="form-group">
+        <label for="Title">Başlık</label>
+        <input type="text" asp-for="Title" class="form-control" />
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+    <div class="form-group">
+        <label for="Title">Açıklama</label>
+        <textarea type="text" asp-for="Title" class="form-control" rows="4"></textarea>
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+    <div class="form-group">
+        <label for="Title">Sektöre Giriş Yılı</label>
+        <input type="number" asp-for="StartYear" class="form-control" />
+        <span class="text-danger" asp-validation-for="StartYear"></span>
+    </div>
+
+    <button class="btn btn-outline-primary"><i class="fa fa-edit"></i>Kaydet</button>
+</form>

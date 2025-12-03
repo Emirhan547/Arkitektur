@@ -3,6 +3,7 @@ using Arkitektur.Business.DTOs.AboutDtos;
 using Arkitektur.DataAccess.Repositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
+using FluentValidation;
 using Mapster;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,16 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.AboutServices
 {
-    public class AboutService(IGenericRepository<About>_aboutRepository,IUnitOfWork _unitOfWork ) : IAboutService
+    public class AboutService(IGenericRepository<About>_aboutRepository,IUnitOfWork _unitOfWork,IValidator<About>_validator ) : IAboutService
     {
         public async Task<BaseResult<object>> CreateAsync(CreateAboutDto createAboutDto)
         {
             var about=createAboutDto.Adapt<About>();
+            var validationResult = await _validator.ValidateAsync(about);
+            if (!validationResult.IsValid)
+            {
+                return BaseResult<object>.Fail(validationResult.Errors);
+            }
             await _aboutRepository.CreateAsync(about);
             var result=await _unitOfWork.SaveChangesAsync();
             return result?BaseResult<object>.Success(about):BaseResult<object>.Fail("Create Failed");
@@ -56,6 +62,11 @@ namespace Arkitektur.Business.Services.AboutServices
         public async Task<BaseResult<object>> UpdateAsync(UpdateAboutDto aboutDto)
         {
             var about = aboutDto.Adapt<About>();
+            var validationResult = await _validator.ValidateAsync(about);
+            if (!validationResult.IsValid)
+            {
+                return BaseResult<object>.Fail(validationResult.Errors);
+            }
             _aboutRepository.Update(about);
             var result = await _unitOfWork.SaveChangesAsync();
             return result ? BaseResult<object>.Success() : BaseResult<object>.Fail("Update Failed");

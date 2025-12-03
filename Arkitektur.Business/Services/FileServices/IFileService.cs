@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arkitektur.Business.Services.FileServices
+namespace Arkitektur.Business.Services.FileServices;
+
+public interface IFileService
 {
-    public interface IFileService
-    {
-        Task<BaseResult<object>> UploadImageToS3Async(IFormFile? file);
-    }
+    Task<BaseResult<object>> UploadImageToS3Async(IFormFile? file);
+
+    Task<BaseResult<object>> DeleteFileAsync(string imageUrl);
+
 }

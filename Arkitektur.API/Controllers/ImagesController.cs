@@ -14,5 +14,11 @@ namespace Arkitektur.API.Controllers
             var response = await _fileService.UploadImageToS3Async(file);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
+        [HttpDelete("{imageUrl}")]
+        public async Task<IActionResult> DeleteFile([FromQuery] string imageUrl)
+        {
+            var response = await _fileService.DeleteFileAsync(imageUrl);
+            return response.IsSuccessful ? Ok(response) : BadRequest(response);
+        }
     }
 }
