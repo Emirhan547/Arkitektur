@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.DTOs.FeatureDtos
 {
-    public record CreateFeatureDto( string Title, string Description, string BackgroundImage, string Icon);
+    public record CreateFeatureDto( string? Title, string? Description, string? BackgroundImage, string? Icon);
 
 }

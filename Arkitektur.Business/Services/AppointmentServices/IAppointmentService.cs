@@ -15,5 +15,7 @@ namespace Arkitektur.Business.Services.AppointmentServices
         Task<BaseResult<object>> CreateAsync(CreateAppointmentDto appointmentDtos);
         Task<BaseResult<object>> UpdateAsync(UpdateAppointmentDto appointmentDtos);
         Task<BaseResult<object>> DeleteAsync(int id);
+        Task<BaseResult<object>> ApproveAppointmentAsync(UpdateAppointmentDto appointmentDto);
+        Task<BaseResult<object>> CancelAppointmentAsync(UpdateAppointmentDto appointmentDto);
     }
 }

@@ -12,7 +12,7 @@ namespace Arkitektur.WebUI.Areas.Admin.Controllers
             var abouts = await _aboutService.GetAllAsync();
             return View(abouts.Data);
         }
-        public IActionResult Create()
+        public IActionResult CreateAbout()
         {
             return View();
         }

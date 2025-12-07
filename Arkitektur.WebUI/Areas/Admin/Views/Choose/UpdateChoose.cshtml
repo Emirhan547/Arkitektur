@@ -1,0 +1,27 @@
+﻿@model UpdateChooseDto
+@{
+    ViewData["Title"] = "UpdateChoose";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Neden Biz Alanı Güncelle</h3>
+<form method="post">
+    <input type="hidden"asp-for="Id"/>
+    <div class="form-group">
+        <label>Başlık</label>
+        <input type="text" class="form-control" asp-for="Title" />
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+    <div class="form-group">
+        <label>İkon</label>
+        <input type="text" class="form-control" asp-for="Icon" />
+        <span class="text-danger" asp-validation-for="Icon"></span>
+    </div>
+    <div class="form-group">
+        <label>Açıklama</label>
+        <textarea type="text" class="form-control" asp-for="Description" rows="4"></textarea>
+        <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+
+    <button class="btn btn-outline-primary"><i class="fa fa-save"></i>Güncelle</button>
+</form>

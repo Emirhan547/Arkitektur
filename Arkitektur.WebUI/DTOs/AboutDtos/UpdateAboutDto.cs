@@ -1,4 +1,6 @@
-﻿namespace Arkitektur.WebUI.DTOs.AboutDtos
+﻿using System.Text.Json.Serialization;
+
+namespace Arkitektur.WebUI.DTOs.AboutDtos
 {
     public class UpdateAboutDto
     {
@@ -6,6 +8,7 @@
         public string? Title { get; set; }
         public string? Description { get; set; }
         public int StartYear { get; set; }
+        [JsonIgnore]
         public IFormFile File { get; set; }
         public string? ImageUrl { get; set; }
     }

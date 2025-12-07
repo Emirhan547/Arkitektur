@@ -1,0 +1,31 @@
+﻿@model CreateContactDto
+@{
+    ViewData["Title"] = "CreateContact";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Yeni İletişim Bilgisi Oluştur</h3>
+
+<form method="post">
+    <div class="form-group">
+        <label>Adres</label>
+        <input type="text" class="form-control" asp-for="Address" />
+        <span class="text-danger" asp-validation-for="Address"></span>
+    </div>
+    <div class="form-group">
+        <label>Telefon Numarası</label>
+        <input type="text" class="form-control" asp-for="PhoneNumber" />
+        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" asp-for="Email" />
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+    <div class="form-group">
+        <label>Harita Url</label>
+        <input type="text" class="form-control" asp-for="MapUrl" />
+        <span class="text-danger" asp-validation-for="MapUrl"></span>
+    </div>
+    <button class="btn btn-outline-primary"><i class="fa fa-save"></i>Kaydet</button>
+</form>

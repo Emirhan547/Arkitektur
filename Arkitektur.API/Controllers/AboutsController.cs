@@ -1,5 +1,6 @@
 ﻿using Arkitektur.Business.DTOs.AboutDtos;
 using Arkitektur.Business.Services.AboutServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace Arkitektur.API.Controllers
     [ApiController]
     public class AboutsController(IAboutService _aboutService) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<ResultAboutDto>>> GetAll()
         {

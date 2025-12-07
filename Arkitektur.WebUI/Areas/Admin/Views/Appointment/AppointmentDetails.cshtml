@@ -1,0 +1,36 @@
+﻿@model UpdateAppointmentDto
+@{
+    ViewData["Title"] = "AppointmentDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Randevu Detayları</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Ad Soyad</th>
+        <td>@Model.NameSurname</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Telefon Numarası</th>
+        <td>@Model.PhoneNumber</td>
+    </tr>
+    <tr>
+        <th>Hizmet Türü</th>
+        <td>@Model.ServiceName</td>
+    </tr>
+    <tr>
+        <th>Randevu Tarih</th>
+        <td>@Model.AppointmentDate</td>
+    </tr>
+    <tr>
+        <th>Mesaj</th>
+        <td>@Model.Message</td>
+    </tr>
+   
+    </table>
+    <a class="btn btn-outline-primary"href="/Admin/Appointment">Randevulara Geri Dön</a>

@@ -10,45 +10,62 @@ namespace Arkitektur.WebUI.Services.AboutServices
         public async Task<BaseResult<object>> CreateAsync(CreateAboutDto aboutDto)
         {
             var imageResponse = await _fileService.UploadFileAsync(aboutDto.File);
-            if(imageResponse.IsFailure)
+            if (imageResponse.IsFailure)
             {
                 throw new ApiValidationException(imageResponse.Errors);
             }
             aboutDto.ImageUrl = imageResponse.Data.ImageUrl;
-            var response = await _client.PostAsJsonAsync("Abouts", aboutDto);
+            var response = await _client.PostAsJsonAsync("abouts", aboutDto);
             var result = await response.Content.ReadFromJsonAsync<BaseResult<object>>();
-            return result.IsFailure ? throw new ApiValidationException(result.Errors) : result;
+            if (result.IsFailure)
+            {
+                await _fileService.DeleteFileAsync(imageResponse.Data.ImageUrl);
+                throw new ApiValidationException(result.Errors);
+            }
+
+
+            return result;
         }
 
         public async Task<BaseResult<object>> DeleteAsync(int id)
         {
-            var project = await _client.GetFromJsonAsync<BaseResult<ResultAboutDto>>("Abouts/" + id);
+            var project = await _client.GetFromJsonAsync<BaseResult<ResultAboutDto>>("abouts/" + id);
             await _fileService.DeleteFileAsync(project.Data.ImageUrl);
-            var response = await _client.DeleteAsync("Abouts/" + id);
+            var response = await _client.DeleteAsync("features/" + id);
             return await response.Content.ReadFromJsonAsync<BaseResult<object>>();
         }
 
         public async Task<BaseResult<List<ResultAboutDto>>> GetAllAsync()
         {
-            return await _client.GetFromJsonAsync<BaseResult<List<ResultAboutDto>>>("Abouts");
+            return await _client.GetFromJsonAsync<BaseResult<List<ResultAboutDto>>>("abouts");
         }
 
         public async Task<BaseResult<UpdateAboutDto>> GetByIdAsync(int id)
         {
-            return await _client.GetFromJsonAsync<BaseResult<UpdateAboutDto>>($"Abouts/{id}");
+            return await _client.GetFromJsonAsync<BaseResult<UpdateAboutDto>>($"abouts/{id}");
         }
+
 
         public async Task<BaseResult<object>> UpdateAsync(UpdateAboutDto aboutDto)
         {
             if (aboutDto.File is not null)
             {
-                await _fileService.DeleteFileAsync(aboutDto.ImageUrl);
                 var imageResponse = await _fileService.UploadFileAsync(aboutDto.File);
+                if (imageResponse.IsFailure)
+                {
+                    throw new ApiValidationException(imageResponse.Errors);
+                }
+                await _fileService.DeleteFileAsync(aboutDto.ImageUrl);
                 aboutDto.ImageUrl = imageResponse.Data.ImageUrl;
             }
-            var response = await _client.PutAsJsonAsync("Abouts", aboutDto);
+            var response = await _client.PutAsJsonAsync("features", aboutDto);
             var result = await response.Content.ReadFromJsonAsync<BaseResult<object>>();
-            return result.IsFailure ? throw new ApiValidationException(result.Errors) : result;
+            if (result.IsFailure)
+            {
+                throw new ApiValidationException(result.Errors);
+            }
+            return result;
+
         }
     }
 }

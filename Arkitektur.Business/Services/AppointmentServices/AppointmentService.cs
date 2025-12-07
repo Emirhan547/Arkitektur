@@ -4,6 +4,7 @@ using Arkitektur.Business.DTOs.AppointmentDtos;
 using Arkitektur.DataAccess.Repositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
+using Arkitektur.Entity.Enums;
 using FluentValidation;
 using Mapster;
 using System;
@@ -16,6 +17,25 @@ namespace Arkitektur.Business.Services.AppointmentServices
 {
     public class AppointmentService(IGenericRepository<Appointment>_repository,IUnitOfWork _unitOfWork,IValidator<Appointment>_validator) : IAppointmentService
     {
+        public async Task<BaseResult<object>> ApproveAppointmentAsync(UpdateAppointmentDto appointmentDto)
+        {
+            var appointment = appointmentDto.Adapt<Appointment>();
+            appointment.Status=AppointmentStatus.Approved;
+            _repository.Update(appointment);
+            var result = await _unitOfWork.SaveChangesAsync();
+            return result ? BaseResult<object>.Success(appointment) : BaseResult<object>.Fail("Approve Failed)");
+
+        }
+
+        public async Task<BaseResult<object>> CancelAppointmentAsync(UpdateAppointmentDto appointmentDto)
+        {
+            var appointment = appointmentDto.Adapt<Appointment>();
+            appointment.Status = AppointmentStatus.Cancelled;
+            _repository.Update(appointment);
+            var result = await _unitOfWork.SaveChangesAsync();
+            return result ? BaseResult<object>.Success(appointment) : BaseResult<object>.Fail("Cancel Failed)");
+        }
+
         public async Task<BaseResult<object>> CreateAsync(CreateAppointmentDto appointmentDto)
         {
             var appointment= appointmentDto.Adapt<Appointment>();
@@ -26,7 +46,7 @@ namespace Arkitektur.Business.Services.AppointmentServices
             }
             await _repository.CreateAsync(appointment);
             var result= await _unitOfWork.SaveChangesAsync();
-            return result ? BaseResult<object>.Success(appointment) : BaseResult<object>.Fail("Create Failded)");
+            return result ? BaseResult<object>.Success(appointment) : BaseResult<object>.Fail("Create Failed)");
         }
 
         public async Task<BaseResult<object>> DeleteAsync(int id)
