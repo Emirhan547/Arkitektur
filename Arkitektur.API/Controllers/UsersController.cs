@@ -8,14 +8,14 @@ namespace Arkitektur.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
-    public class UsersController(IUserService _userService ) : ControllerBase
+
+    public class UsersController(IUserService _userService) : ControllerBase
     {
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> CreateUser(CreateUserDto userDto)
         {
-           var response = await _userService.CreateUserAsync(userDto);
+            var response = await _userService.CreateUserAsync(userDto);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
         [AllowAnonymous]
@@ -23,6 +23,12 @@ namespace Arkitektur.API.Controllers
         public async Task<ActionResult> Login(LoginDto loginDto)
         {
             var response = await _userService.LoginAsync(loginDto);
+            return response.IsSuccessful ? Ok(response) : BadRequest(response);
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<ResultUserDto>>> GetAllUsers()
+        {
+            var response = await _userService.GetAllUsersAsync();
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
     }

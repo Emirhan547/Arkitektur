@@ -36,7 +36,7 @@ namespace Arkitektur.Business.Services.JwtServices
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
-            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(
+            JwtSecurityToken jwtSecurityToken = new (
                 issuer: _tokenOptions.Issuer,
                 audience: _tokenOptions.Audience,
                 claims: claims,

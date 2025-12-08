@@ -1,6 +1,7 @@
 ﻿
 using Arkitektur.Business.DTOs.FeatureDtos;
 using Arkitektur.Business.Services.FeatureServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace Arkitektur.API.Controllers
     [ApiController]
     public class FeaturesController(IFeatureService _featureService) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<ResultFeatureDto>>> GetAll()
         {

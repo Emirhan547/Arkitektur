@@ -51,6 +51,7 @@ namespace Arkitektur.Business.Services.RoleAssignServices
                 var assignRoleDto = new AssignRoleDto
                 {
                     UserId = user.Id,
+                    FullName = user.FirstName+" "+user.LastName,
                     RoleId = role.Id,
                     RoleName = role.Name!,
                     RoleExist = userRoles.Contains(role.Name!)

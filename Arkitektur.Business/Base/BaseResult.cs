@@ -28,7 +28,7 @@ namespace Arkitektur.Business.Base
         }
         public static BaseResult<T> Fail(string errorMessage)
         {
-            return new BaseResult<T> { Errors = new[] { new { ErrorMessage = errorMessage } } };
+            return new BaseResult<T> { Errors = new[] { new { ErrorMessage = errorMessage,PropertyName="key" } } };
         }
         public static BaseResult<T> Fail(List<ValidationFailure> errorMessage)
         {

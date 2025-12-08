@@ -1,6 +1,7 @@
 ﻿using Arkitektur.Business.DTOs.AboutDtos;
 using Arkitektur.Business.DTOs.CategoryDtos;
 using Arkitektur.Business.Services.CategoryServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace Arkitektur.API.Controllers
     [ApiController]
     public class CategoriesController(ICategoryService _categoryService) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<ResultCategoryDto>>> GetAll()
         {
@@ -17,6 +19,7 @@ namespace Arkitektur.API.Controllers
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
 
         }
+        [AllowAnonymous]
         [HttpGet("WithProjects")]
         public async Task<ActionResult<List<ResultCategoryDto>>> GetCategoriesWithProjects()
         {

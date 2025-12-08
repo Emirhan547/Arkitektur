@@ -22,10 +22,23 @@ namespace Arkitektur.Business.Services.UserServices
             return BaseResult<object>.Success(new { Message="User Create"});
         }
 
+        public async Task<BaseResult<List<ResultUserDto>>> GetAllUsersAsync()
+        {
+            var users=await userManager.Users.ToListAsync();
+            var mappedUsers = users.Adapt<List<ResultUserDto>>();
+            foreach (var user in users)
+            {
+                var userRoles=await userManager.GetRolesAsync(user);
+                mappedUsers.Find(x=>x.Id == user.Id).Roles=userRoles;
+            }
+
+            return BaseResult<List<ResultUserDto>>.Success(mappedUsers);
+        }
+
         public async Task<BaseResult<TokenResponseDto>> LoginAsync(LoginDto loginDto)
         {
             var user= await userManager.FindByEmailAsync(loginDto.Email);
-            if (user==null)
+            if (user is null)
             {
                 return BaseResult<TokenResponseDto>.Fail("User Not Found");
             }

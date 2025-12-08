@@ -1,10 +1,12 @@
 ﻿using Arkitektur.WebUI.DTOs.AboutDtos;
 using Arkitektur.WebUI.Services.AboutServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class AboutController(IAboutService _aboutService) : Controller
     {
         public async Task<IActionResult> Index()

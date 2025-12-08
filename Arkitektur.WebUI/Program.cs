@@ -1,12 +1,29 @@
 using Arkitektur.WebUI.Extensions;
 using Arkitektur.WebUI.Filters;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddHttpClientServices(builder.Configuration);
 builder.Services.AddServiceRegistrationsExt(builder.Configuration);
-builder.Services.AddControllersWithViews( options=>
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddAuthentication(JwtBearerDefaults
+        .AuthenticationScheme)
+    .AddCookie(JwtBearerDefaults.AuthenticationScheme, options =>
+    {
+        options.LoginPath = "/Auth/Login";
+        options.LogoutPath = "/Auth/Logout";
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        options.Cookie.Name = "ArkitekturJwtCookie";
+    });
+
+builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<ValidationExceptionFilter>();
 });
@@ -23,15 +40,18 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
 
-    app.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
+
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+);
+
 
 app.MapControllerRoute(
     name: "default",

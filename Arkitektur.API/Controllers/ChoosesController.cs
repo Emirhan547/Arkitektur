@@ -1,6 +1,7 @@
 ﻿using Arkitektur.Business.DTOs.AboutDtos;
 using Arkitektur.Business.DTOs.ChooseDtos;
 using Arkitektur.Business.Services.ChooseServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace Arkitektur.API.Controllers
     [ApiController]
     public class ChoosesController(IChooseService _chooseService) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<ResultChooseDto>>> GetAll()
         {

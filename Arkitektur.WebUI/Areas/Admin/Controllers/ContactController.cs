@@ -1,10 +1,12 @@
 ﻿using Arkitektur.WebUI.DTOs.ContactDtos;
 using Arkitektur.WebUI.Services.ContactServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ContactController(IContactService _contactService) : Controller
     {
         public async Task<IActionResult> Index()

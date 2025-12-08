@@ -13,5 +13,6 @@ namespace Arkitektur.Business.Services.UserServices
     {
         Task<BaseResult<object>> CreateUserAsync(CreateUserDto userDto);
         Task<BaseResult<TokenResponseDto>> LoginAsync(LoginDto loginDto);
+        Task<BaseResult<List<ResultUserDto>>>GetAllUsersAsync();
     }
 }
