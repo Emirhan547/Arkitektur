@@ -31,7 +31,7 @@ namespace Arkitektur.WebUI.Services.AboutServices
         {
             var project = await _client.GetFromJsonAsync<BaseResult<ResultAboutDto>>("abouts/" + id);
             await _fileService.DeleteFileAsync(project.Data.ImageUrl);
-            var response = await _client.DeleteAsync("features/" + id);
+            var response = await _client.DeleteAsync("abouts/" + id);
             return await response.Content.ReadFromJsonAsync<BaseResult<object>>();
         }
 
@@ -58,7 +58,7 @@ namespace Arkitektur.WebUI.Services.AboutServices
                 await _fileService.DeleteFileAsync(aboutDto.ImageUrl);
                 aboutDto.ImageUrl = imageResponse.Data.ImageUrl;
             }
-            var response = await _client.PutAsJsonAsync("features", aboutDto);
+            var response = await _client.PutAsJsonAsync("abouts", aboutDto);
             var result = await response.Content.ReadFromJsonAsync<BaseResult<object>>();
             if (result.IsFailure)
             {

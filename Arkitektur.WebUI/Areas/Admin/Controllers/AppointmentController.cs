@@ -1,12 +1,13 @@
-﻿using Arkitektur.WebUI.DTOs.AppointmentDtos;
+﻿using Arkitektur.WebUI.Consts;
+using Arkitektur.WebUI.DTOs.AppointmentDtos;
 using Arkitektur.WebUI.Services.AppointmentServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
+    [Area(Area.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public class AppointmentController(IAppointmentService _appointmentService) : Controller
     {
         public async Task<IActionResult> Index()

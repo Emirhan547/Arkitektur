@@ -1,4 +1,5 @@
-﻿using Arkitektur.WebUI.DTOs.ProjectDtos;
+﻿using Arkitektur.WebUI.Consts;
+using Arkitektur.WebUI.DTOs.ProjectDtos;
 using Arkitektur.WebUI.Services.CategoryServices;
 using Arkitektur.WebUI.Services.ProjectServices;
 using Microsoft.AspNetCore.Authorization;
@@ -8,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
+    [Area(Area.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public class ProjectController(IProjectService _projectService, ICategoryService _categoryService) : Controller
     {
         private async Task GetCategories()

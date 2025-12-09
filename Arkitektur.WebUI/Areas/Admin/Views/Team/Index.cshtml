@@ -1,0 +1,56 @@
+﻿
+@model List<ResultTeamDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+<h3>Ekip Üyelerimiz</h3>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>#</th>
+        <th colspan="2">Ad Soyad</th>
+        <th>Unvan</th>
+        <th>İşlemler</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@count</th>
+            <td colspan="2"><img src="@item.ImageUrl" style="height:100px; width:100px;" />@item.NameSurname</td>
+            <td>@item.Title</td>
+
+            <td>
+                <button title="Sil"onclick="deleteTeam(@item.Id)" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                <a title="Güncelle"href="/Admin/Team/UpdateTeam/@item.Id" class="btn btn-outline-info"><i class="fa fa-edit"></i></a>
+                <a title="Sosyal Medya Ekle" href="/Admin/Team/AssignSocial/@item.Id" class="btn btn-outline-info"><i class="fab fa-linkedin"></i></a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-action="CreateTeam" asp-controller="Team" asp-area="Admin" class="btn btn-outline-primary"><i class="fa fa-plus-circle"></i>Yeni Ekip Üyesi Oluştur</a>
+
+<script>
+    function deleteTeam(id){
+           Swal.fire({
+      title: "Silmek istediğinize emin misiniz?",
+      text: "Bu işlemi geri alamazsınız",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Evet, Sil!",
+      cancelButtonText: "İptal"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+          window.location.href = '/Admin/Team/DeleteTeam/' + id;
+
+      }
+    });
+    }
+</script>
+

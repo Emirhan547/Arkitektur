@@ -30,6 +30,11 @@ namespace Arkitektur.WebUI.Services.CategoryServices
             return await _client.GetFromJsonAsync<BaseResult<UpdateCategoryDto>>("categories/"+id);
         }
 
+        public async Task<BaseResult<List<ResultCategoriesWithProjectsDto>>> GetCategoriesWithProjectsAsync()
+        {
+            return await _client.GetFromJsonAsync<BaseResult<List<ResultCategoriesWithProjectsDto>>>("categories/WithProjects");
+        }
+
         public async Task<BaseResult<object>> UpdateAsync(UpdateCategoryDto categoryDto)
         {
             var response = await _client.PutAsJsonAsync("categories", categoryDto);

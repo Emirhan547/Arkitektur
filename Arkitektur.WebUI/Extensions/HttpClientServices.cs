@@ -9,6 +9,8 @@ using Arkitektur.WebUI.Services.ContactServices;
 using Arkitektur.WebUI.Services.FeatureServices;
 using Arkitektur.WebUI.Services.FileServices;
 using Arkitektur.WebUI.Services.ProjectServices;
+using Arkitektur.WebUI.Services.TeamServices;
+using Arkitektur.WebUI.Services.TeamSocialServices;
 using Arkitektur.WebUI.Services.UserServices;
 
 namespace Arkitektur.WebUI.Extensions
@@ -56,6 +58,15 @@ namespace Arkitektur.WebUI.Extensions
                 client.BaseAddress = new Uri(apiOptions.BaseUrl);
             }).AddHttpMessageHandler<TokenHandler>();
             services.AddHttpClient<IUserService, UserService>(client =>
+            {
+                client.BaseAddress = new Uri(apiOptions.BaseUrl);
+            }).AddHttpMessageHandler<TokenHandler>();
+
+            services.AddHttpClient<ITeamService, TeamService>(client =>
+            {
+                client.BaseAddress = new Uri(apiOptions.BaseUrl);
+            }).AddHttpMessageHandler<TokenHandler>();
+            services.AddHttpClient<ITeamSocialService, TeamSocialService>(client =>
             {
                 client.BaseAddress = new Uri(apiOptions.BaseUrl);
             }).AddHttpMessageHandler<TokenHandler>();

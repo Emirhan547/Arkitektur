@@ -15,7 +15,7 @@ builder.Services.AddControllers(opt=>
     var adminPolicy= new AuthorizationPolicyBuilder().RequireRole("Admin").Build();
     var managerPolicy = new AuthorizationPolicyBuilder().RequireRole("Manager").Build();
 
-    opt.Filters.Add(new AuthorizeFilter(adminPolicy));
+    //opt.Filters.Add(new AuthorizeFilter(adminPolicy));
 });
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

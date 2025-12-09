@@ -1,0 +1,29 @@
+﻿@model List<ResultFeatureDto>
+@*
+    Home Feature Banner
+*@
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h4 class="section-title">Hizmetlerimiz</h4>
+            <h1 class="display-5 mb-4">Modern Mimari ve İçmimarlık alanlarındaki hizmetlerimiz</h1>
+        </div>
+        <div class="row g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item d-flex position-relative text-center h-100">
+                        <img class="bg-img" src="@item.BackgroundImage" alt="">
+                        <div class="service-text p-5">
+                            <i class="mb-4 @item.Icon fa-6x" alt="Icon"></i>
+                            <h3 class="mb-3">@item.Title</h3>
+                            <p class="mb-4">@item.Description</p>
+                            <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Detayı Gör</a>
+                        </div>
+                    </div>
+                </div>
+            }
+           
+        </div>
+    </div>
+</div>

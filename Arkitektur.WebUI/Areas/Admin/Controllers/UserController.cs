@@ -1,13 +1,13 @@
-﻿using Arkitektur.WebUI.DTOs.UserDtos;
+﻿using Arkitektur.WebUI.Consts;
+using Arkitektur.WebUI.DTOs.UserDtos;
 using Arkitektur.WebUI.Services.UserServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
-   
+    [Area(Area.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public class UserController(IUserService _userService) : Controller
     {
         public async Task<IActionResult> Index()

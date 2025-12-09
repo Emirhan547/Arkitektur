@@ -22,9 +22,9 @@ namespace Arkitektur.Business.Services.JwtServices
         private readonly JwtTokenOptions _tokenOptions = tokenOptions.Value;
         public async Task<TokenResponseDto> GenerateTokenAsync(AppUser user)
         {
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenOptions.Key));
+            SymmetricSecurityKey securityKey = new (Encoding.UTF8.GetBytes(_tokenOptions.Key));
             var userRoles = await _userManager.GetRolesAsync(user);
-            List<Claim>claims= new List<Claim>
+            List<Claim>claims= new List<Claim>()
             {
                 new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Name,user.UserName),

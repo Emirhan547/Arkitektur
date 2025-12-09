@@ -1,4 +1,5 @@
-﻿using Arkitektur.WebUI.DTOs.FeatureDtos;
+﻿using Arkitektur.WebUI.Consts;
+using Arkitektur.WebUI.DTOs.FeatureDtos;
 using Arkitektur.WebUI.DTOs.ProjectDtos;
 using Arkitektur.WebUI.Services.FeatureServices;
 using Microsoft.AspNetCore.Authorization;
@@ -6,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
+    [Area(Area.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public class FeatureController(IFeatureService _featureService) : Controller
     {
         public async Task<IActionResult> Index()

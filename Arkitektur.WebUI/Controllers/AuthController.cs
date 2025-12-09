@@ -14,7 +14,7 @@ namespace Arkitektur.WebUI.Controllers
         public async Task<IActionResult> Login(LoginDto model)
         {
            await _userService.LoginAsync(model);
-           return RedirectToAction("Index", "About", new { area ="Admin" });
+           return RedirectToAction("Index", "Banner", new { area ="Admin" });
         }
     }
 }

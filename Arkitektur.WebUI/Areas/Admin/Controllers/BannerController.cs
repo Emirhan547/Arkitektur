@@ -1,12 +1,13 @@
-﻿using Arkitektur.WebUI.DTOs.BannerDtos;
+﻿using Arkitektur.WebUI.Consts;
+using Arkitektur.WebUI.DTOs.BannerDtos;
 using Arkitektur.WebUI.Services.BannerServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
+    [Area(Area.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public class BannerController(IBannerService _bannerService) : Controller
     {
         public async Task<IActionResult> Index()

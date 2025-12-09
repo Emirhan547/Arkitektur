@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    @await Component.InvokeAsync("_UILayoutHead")
+
+<body>
+    <!-- Spinner Start -->
+    @await Component.InvokeAsync("_UILayoutSpinner")
+    <!-- Spinner End -->
+    <!-- Topbar Start -->
+    @await Component.InvokeAsync("_UILayoutTopBar")
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    @await Component.InvokeAsync("_UILayoutNavbar")
+    <!-- Navbar End -->
+    <!-- Carousel Start -->
+    @RenderBody()
+    <!-- Testimonial End -->
+    <!-- Footer Start -->
+    @await Component.InvokeAsync("_UILayoutFooter")
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    @await Component.InvokeAsync("_UILayoutScript")
+    <!-- JavaScript Libraries -->
+ 
+</body>
+
+</html>

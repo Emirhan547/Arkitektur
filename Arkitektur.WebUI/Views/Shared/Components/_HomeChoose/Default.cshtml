@@ -1,0 +1,36 @@
+﻿@model List<ResultChooseDto>
+@*
+    Home Choose Component
+*@
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <h4 class="section-title">Neden Bizi Seçmelisiniz?</h4>
+                <h1 class="display-5 mb-4">Bize Neden Güvenmelisiniz Buyrun Bizi Keşfedin</h1>
+                <p class="mb-4">Firmamızla çalışmak için bir çok nedeniniz var buyrun bir kaçını sizlere anlatalım</p>
+                <div class="row g-4">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-12">
+                            <div class="d-flex align-items-start">
+                                <i class="flex-shrink-0 @item.Icon fa-6x"  alt="Icon"></i>
+                                <div class="ms-4">
+                                    <h3>@item.Title</h3>
+                                    <p class="mb-0">@item.Description</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                   
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="feature-img">
+                    <img class="img-fluid" src="/arkitektur-1.0.0/img/about-2.jpg" alt="">
+                    <img class="img-fluid" src="/arkitektur-1.0.0/img/about-1.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
