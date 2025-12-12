@@ -1,0 +1,88 @@
+﻿
+@*
+    Home Appointment Component
+*@
+<section id="appointment">
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <h4 class="section-title">Randevu Oluşturun</h4>
+                <h1 class="display-5 mb-4">Hayalinizdeki Projeye Hemen Başlamak İçin Bir Randevu Oluşturun</h1>
+                <p class="mb-4">Bizimle birlikte çalışmak isterseniz hemen aşağıdaki formu doldurarak bir randevu oluşturabilirsiniz </p>
+
+
+                @await Component.InvokeAsync("_HomeContactInfo")
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="row g-3">
+                    <form method="post"asp,action="MakeAppointment"asp-controller="Appointment">
+
+
+                   
+                    <div class="col-12 ">
+                            <input type="text" name="NameSurname" class="form-control" placeholder="Adınız Soyadınız" style="height: 55px;" required/>
+                    </div>
+                    <div class="col-12 ">
+                            <input type="email" class="form-control" name="Email" placeholder="Email Adresiniz" style="height: 55px;" required/>
+                    </div>
+                    <div class="col-12">
+                            <input type="text" class="form-control" name="PhoneNumber" placeholder="Telefon Numaranız" style="height: 55px;" required/>
+                    </div>
+                            <select class="form-control" name="ServiceName"  required="">
+                            <option selected disabled="">Hizmet Seçin</option>
+                                <option value="İç Mimarlık">İç Mimarlık</option>
+                                <option value="Proje Tasarımı">Proje Tasarımı</option>
+                                <option value="Apartman Dairesi">Apartman Dairesi</option>
+                                <option value="Gökdelen">Gökdelen</option>
+                                <option value="Plaza">Plaza</option>
+                                <option value="Danışmanlık">Danışmanlık</option>
+                        </select>
+
+                    <div class="col-12">
+                        <div class="date" data-target-input="nearest">
+                            <input type="date"name="AppointmentDate"
+                                   class="form-control datetimepicker-input"
+                                       placeholder="Tarih Seçin" style="height: 55px;" required/>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="time" id="time" data-target-input="nearest">
+                            <input type="text"
+                                   class="form-control datetimepicker-input"
+                                       placeholder="Choose Date" data-target="#time" data-toggle="datetimepicker" style="height: 55px;" required/>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="form-control" rows="5"name="Message" placeholder="Mesajınız" required></textarea>
+                    </div>
+                    <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" type="submit" onclick="makeAppointment()">Randevu Oluştur</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<script>
+    function makeAppointment(){
+           Swal.fire({
+      title: "Randevu Oluşturuldu!",
+      text: "Size en yakın sürede dönüş sağlayacağız",
+      icon: "success",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Tamam",
+      cancelButtonText: "İptal"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+          window.location.href = "/Home/Index";
+
+      }
+    });
+    }
+</script>

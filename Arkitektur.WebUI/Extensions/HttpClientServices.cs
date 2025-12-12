@@ -1,5 +1,6 @@
 ﻿using Arkitektur.WebUI.Handlers;
 using Arkitektur.WebUI.Options;
+using Arkitektur.WebUI.Services;
 using Arkitektur.WebUI.Services.AboutServices;
 using Arkitektur.WebUI.Services.AppointmentServices;
 using Arkitektur.WebUI.Services.BannerServices;
@@ -67,6 +68,11 @@ namespace Arkitektur.WebUI.Extensions
                 client.BaseAddress = new Uri(apiOptions.BaseUrl);
             }).AddHttpMessageHandler<TokenHandler>();
             services.AddHttpClient<ITeamSocialService, TeamSocialService>(client =>
+            {
+                client.BaseAddress = new Uri(apiOptions.BaseUrl);
+            }).AddHttpMessageHandler<TokenHandler>();
+
+            services.AddHttpClient<ITestimonialService, TestimonialService>(client =>
             {
                 client.BaseAddress = new Uri(apiOptions.BaseUrl);
             }).AddHttpMessageHandler<TokenHandler>();

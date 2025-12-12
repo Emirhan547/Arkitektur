@@ -1,0 +1,43 @@
+﻿@model UpdateTestimonialDto
+@{
+    ViewData["Title"] = "UpdateTestimonial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Referans Güncelle</h3>
+
+<div class="card text-center">
+    <div class="card-header">
+        <h4>Referans Profil Resmi </h4>
+    </div>
+    <div class="car-body">
+        <img src="/@Model.ImageUrl" style="height:75px;width:75px" alt="Referans Profil" />
+    </div>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden"asp-for="Id"/>
+    <input type="hidden"asp-for="ImageUrl"/>
+    <div class="form-group">
+        <label for="Title">Referans Profil resmini güncellemek isterseniz yeni resim seçebilirsiniz</label>
+        <input type="file" asp-for="File" class="form-control" />
+        <span class="text-danger" asp-validation-for="File"></span>
+    </div>
+    <div class="form-group">
+        <label>Ad Soyad</label>
+        <input type="text" asp-for="NameSurname" class="form-control" />
+        <span class="text-danger" asp-validation-for="NameSurname"></span>
+    </div>
+    <div class="form-group">
+        <label>Unvan</label>
+        <textarea type="text" asp-for="Title" class="form-control" rows="4"></textarea>
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+    <div class="form-group">
+        <label>Yorum</label>
+        <input type="number" asp-for="Comment" class="form-control" />
+        <span class="text-danger" asp-validation-for="Comment"></span>
+    </div>
+
+    <button class="btn btn-outline-info"><i class="fa fa-edit"></i>Güncelle</button>
+</form>

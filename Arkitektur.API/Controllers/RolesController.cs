@@ -8,7 +8,7 @@ namespace Arkitektur.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    
     public class RolesController(IRoleService _roleService) : ControllerBase
     {
 
