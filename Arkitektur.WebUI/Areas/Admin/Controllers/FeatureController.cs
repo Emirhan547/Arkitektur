@@ -16,7 +16,7 @@ namespace Arkitektur.WebUI.Areas.Admin.Controllers
             var response = await _featureService.GetAllAsync();
             return View(response.Data);
         }
-        public async Task<IActionResult> CreateFeature()
+        public IActionResult CreateFeature()
         {
             return View();
         }

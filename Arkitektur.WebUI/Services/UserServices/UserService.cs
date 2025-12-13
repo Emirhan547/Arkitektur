@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace Arkitektur.WebUI.Services.UserServices
 {
-    public class UserService(HttpClient _client,IHttpContextAccessor _httpContextAccessor) : IUserService
+    public class UserService(HttpClient _client, IHttpContextAccessor _httpContextAccessor) : IUserService
     {
         public Task<BaseResult<object>> AssignRoleAsync(List<AssignRoleDto> assignRoleDtos)
         {
@@ -29,23 +29,23 @@ namespace Arkitektur.WebUI.Services.UserServices
 
         public async Task<BaseResult<TokenResponseDto>> LoginAsync(LoginDto model)
         {
-           var response=await _client.PostAsJsonAsync("users/login", model);
-           var result= await response.Content.ReadFromJsonAsync<BaseResult<TokenResponseDto>>();
-            if(result.IsFailure)
+            var response = await _client.PostAsJsonAsync("users/login", model);
+            var result = await response.Content.ReadFromJsonAsync<BaseResult<TokenResponseDto>>();
+            if (result.IsFailure)
             {
                 throw new ApiValidationException(result.Errors);
             }
-            JwtSecurityTokenHandler handler=new();
-            var token =handler.ReadJwtToken(result.Data.Token);
-            var claims=token.Claims.ToList();
+            JwtSecurityTokenHandler handler = new();
+            var token = handler.ReadJwtToken(result.Data.Token);
+            var claims = token.Claims.ToList();
             claims.Add(new Claim("Token", result.Data.Token));
-            var claimsIdentity=new ClaimsIdentity(claims,JwtBearerDefaults.AuthenticationScheme);
-            var authProperties=new AuthenticationProperties
+            var claimsIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc=result.Data.ExpireTime,
-                IsPersistent=true
+                ExpiresUtc = result.Data.ExpireTime,
+                IsPersistent = true
             };
-            await _httpContextAccessor.HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),authProperties);
+            await _httpContextAccessor.HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
             return result;
 
         }

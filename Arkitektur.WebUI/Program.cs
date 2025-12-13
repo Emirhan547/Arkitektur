@@ -1,4 +1,4 @@
-using Arkitektur.WebUI.Extensions;
+﻿using Arkitektur.WebUI.Extensions;
 using Arkitektur.WebUI.Filters;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

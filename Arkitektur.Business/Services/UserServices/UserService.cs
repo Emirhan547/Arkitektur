@@ -7,50 +7,54 @@ using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Arkitektur.Business.Services.UserServices
+namespace Arkitektur.Business.Services.UserServices;
+
+public class UserService(UserManager<AppUser> userManager, IJwtService jwtService) : IUserService
 {
-    public class UserService(UserManager<AppUser>userManager,IJwtService _jwtService) : IUserService
+    public async Task<BaseResult<object>> CreateUserAsync(CreateUserDto userDto)
     {
-        public async Task<BaseResult<object>> CreateUserAsync(CreateUserDto userDto)
+        var user = userDto.Adapt<AppUser>();
+
+        var result = await userManager.CreateAsync(user, userDto.Password);
+        if (!result.Succeeded)
         {
-           var user=userDto.Adapt<AppUser>();
-            var result= await userManager.CreateAsync(user,userDto.Password);
-            if (!result.Succeeded)
-            {
-                return BaseResult<object>.Fail(result.Errors);
-            }
-            return BaseResult<object>.Success(new { Message="User Create"});
+            return BaseResult<object>.Fail(result.Errors);
         }
 
-        public async Task<BaseResult<List<ResultUserDto>>> GetAllUsersAsync()
-        {
-            var users=await userManager.Users.ToListAsync();
-            var mappedUsers = users.Adapt<List<ResultUserDto>>();
-            foreach (var user in users)
-            {
-                var userRoles=await userManager.GetRolesAsync(user);
-                mappedUsers.Find(x=>x.Id == user.Id).Roles=userRoles;
-            }
+        return BaseResult<object>.Success(new { Message = "User Created" });
+    }
 
-            return BaseResult<List<ResultUserDto>>.Success(mappedUsers);
+    public async Task<BaseResult<TokenResponseDto>> LoginAsync(LoginDto loginDto)
+    {
+        var user = await userManager.FindByEmailAsync(loginDto.Email);
+        if (user is null)
+        {
+            return BaseResult<TokenResponseDto>.Fail("User Not Found");
         }
 
-        public async Task<BaseResult<TokenResponseDto>> LoginAsync(LoginDto loginDto)
-        {
-            var user= await userManager.FindByEmailAsync(loginDto.Email);
-            if (user is null)
-            {
-                return BaseResult<TokenResponseDto>.Fail("User Not Found");
-            }
-            var result= await userManager.CheckPasswordAsync(user,loginDto.Password);
-            if (!result)
-            {
-                return BaseResult<TokenResponseDto>.Fail("Email or Password Wrong");
-            }
-            var tokenResponse=await _jwtService.GenerateTokenAsync(user);
-            return BaseResult<TokenResponseDto>.Success(tokenResponse);
+        var result = await userManager.CheckPasswordAsync(user, loginDto.Password);
 
+        if (!result)
+        {
+            return BaseResult<TokenResponseDto>.Fail("Email or Password is incorrect");
         }
+
+        var tokenResponse = await jwtService.GenerateTokenAsync(user);
+        return BaseResult<TokenResponseDto>.Success(tokenResponse);
+    }
+
+    public async Task<BaseResult<List<ResultUserDto>>> GetAllUsersAsync()
+    {
+        var users = await userManager.Users.ToListAsync();
+        var mappedUsers = users.Adapt<List<ResultUserDto>>();
+        foreach (var user in users)
+        {
+            var userRoles = await userManager.GetRolesAsync(user);
+
+            mappedUsers.Find(x => x.Id == user.Id).Roles = userRoles;
+        }
+
+
+        return BaseResult<List<ResultUserDto>>.Success(mappedUsers);
     }
 }
-

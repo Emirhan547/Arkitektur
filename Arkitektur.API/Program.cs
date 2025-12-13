@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRepositoriesExt(builder.Configuration)
-    .AddServiceExt(builder.Configuration);
+    .AddServicesExt(builder.Configuration);
 builder.Services.AddControllers(options =>
 {
     var adminPolicy = new AuthorizationPolicyBuilder().RequireRole("Admin").Build();

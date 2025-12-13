@@ -53,8 +53,8 @@ namespace Arkitektur.Business.Services.RoleAssignServices
                     UserId = user.Id,
                     FullName = user.FirstName+" "+user.LastName,
                     RoleId = role.Id,
-                    RoleName = role.Name!,
-                    RoleExist = userRoles.Contains(role.Name!)
+                    RoleName = role.Name,
+                    RoleExist = userRoles.Contains(role.Name)
                 };
                 roleAssignments.Add(assignRoleDto);
             }

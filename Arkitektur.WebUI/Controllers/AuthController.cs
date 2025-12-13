@@ -13,8 +13,8 @@ namespace Arkitektur.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto model)
         {
-           await _userService.LoginAsync(model);
-           return RedirectToAction("Index", "About", new { area ="Admin" });
+            await _userService.LoginAsync(model);
+            return RedirectToAction("Index", "About", new { area = "Admin" });
         }
     }
 }

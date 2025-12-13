@@ -8,7 +8,7 @@ namespace Arkitektur.WebUI.Services.UserServices
     {
         Task<BaseResult<List<ResultUserDto>>> GetAllUsersAsync();
         Task<BaseResult<List<AssignRoleDto>>> GetUserForRoleAssignAsync(int id);
-        Task<BaseResult<object>> AssignRoleAsync(List<AssignRoleDto>assignRoleDtos);
+        Task<BaseResult<object>> AssignRoleAsync(List<AssignRoleDto> assignRoleDtos);
         Task<BaseResult<TokenResponseDto>> LoginAsync(LoginDto model);
     }
 }
