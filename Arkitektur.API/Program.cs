@@ -1,9 +1,11 @@
-﻿using Arkitektur.Business.Extensions;
+﻿using Arkitektur.API.Extensions;
+using Arkitektur.API.Options;
+using Arkitektur.Business.Extensions;
 using Arkitektur.DataAccess.Extensions;
-using Scalar.AspNetCore;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Scalar.AspNetCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRepositoriesExt(builder.Configuration)
                 .AddServicesExt(builder.Configuration);
-
+builder.Services.Configure<AdminUserOptions>(builder.Configuration.GetSection("AdminUser"));
 builder.Services.AddControllers(opt =>
 {
     var adminPolicy = new AuthorizationPolicyBuilder().RequireRole("Admin").Build();
@@ -36,5 +38,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+await app.SeedIdentityDataAsync();
 app.Run();
