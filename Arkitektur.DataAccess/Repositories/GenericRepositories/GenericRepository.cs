@@ -1,19 +1,26 @@
 ﻿using Arkitektur.Entity.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace Arkitektur.DataAccess.Repositories;
+namespace Arkitektur.DataAccess.Repositories.GenericRepositories;
 
-public class GenericRepository<TEntity>(AppDbContext context) : IGenericRepository<TEntity> where TEntity : BaseEntity
+public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
 {
-    private readonly DbSet<TEntity> _table = context.Set<TEntity>();
+    protected readonly AppDbContext Context;
+    private readonly DbSet<TEntity> _table;
+
+    public GenericRepository(AppDbContext context)
+    {
+        Context = context;
+        _table = context.Set<TEntity>();
+    }
     public async Task CreateAsync(TEntity entity)
     {
-        await context.AddAsync(entity);
+     
+        await Context.AddAsync(entity);
     }
-
     public void Delete(TEntity entity)
     {
-        context.Remove(entity);
+        Context.Remove(entity);
     }
 
     public async Task<List<TEntity>> GetAllAsync()
@@ -33,6 +40,6 @@ public class GenericRepository<TEntity>(AppDbContext context) : IGenericReposito
 
     public void Update(TEntity entity)
     {
-        context.Update(entity);
+        Context.Update(entity);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.AboutDtos;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.AboutRepositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using FluentValidation;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.AboutServices
 {
-    public class AboutService(IGenericRepository<About>_aboutRepository,IUnitOfWork _unitOfWork,IValidator<About>_validator ) : IAboutService
+    public class AboutService(IAboutRepository _aboutRepository,IUnitOfWork _unitOfWork,IValidator<About>_validator ) : IAboutService
     {
         public async Task<BaseResult<object>> CreateAsync(CreateAboutDto createAboutDto)
         {

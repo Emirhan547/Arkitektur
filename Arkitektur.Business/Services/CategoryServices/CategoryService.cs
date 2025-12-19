@@ -1,6 +1,7 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.CategoryDtos;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.CategoryRepositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using FluentValidation;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.CategoryServices
 {
-    public class CategoryService(IGenericRepository<Category>_repository,IUnitOfWork _unitOfWork,IValidator<Category> _validator) : ICategoryService
+    public class CategoryService(ICategoryRepository _repository,IUnitOfWork _unitOfWork,IValidator<Category> _validator) : ICategoryService
     {
         public async Task<BaseResult<object>> CreateAsync(CreateCategoryDto createCategoryDto)
         {
@@ -63,7 +64,7 @@ namespace Arkitektur.Business.Services.CategoryServices
 
         public async Task<BaseResult<List<ResultCategoriesWithProjectsDto>>> GetCategoriesWithProjectsAsync()
         {
-           var categories= await _repository.GetQueryable().Include(x=>x.Projects).ToListAsync();
+            var categories = await _repository.GetCategoriesWithProjectsAsync();
             var resultCategories= categories.Adapt<List<ResultCategoriesWithProjectsDto>>();
             return BaseResult<List<ResultCategoriesWithProjectsDto>>.Success(resultCategories);
         }

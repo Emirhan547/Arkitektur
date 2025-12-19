@@ -1,7 +1,8 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.AboutDtos;
 using Arkitektur.Business.DTOs.BannerDtos;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.BannerRepositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using FluentValidation;
@@ -10,7 +11,7 @@ using Mapster;
 
 namespace Arkitektur.Business.Services.BannerServices
 {
-    public class BannerService (IGenericRepository<Banner>_repository,IUnitOfWork _unitOfWork,IValidator<Banner>_validator): IBannerService
+    public class BannerService (IBannerRepository _repository,IUnitOfWork _unitOfWork,IValidator<Banner>_validator): IBannerService
     {
         public async Task<BaseResult<object>> CreateAsync(CreateBannerDto createBannerDto)
         {

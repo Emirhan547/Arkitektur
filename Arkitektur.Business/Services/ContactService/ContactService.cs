@@ -1,7 +1,8 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.ContactDtos;
 using Arkitektur.Business.DTOs.ProjectDtos;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.ContactRepositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using FluentValidation;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.ContactService
 {
-    public class ContactService(IGenericRepository<Contact>_repository,IUnitOfWork _unitOfWork,IValidator<Contact>_validator) : IContactService
+    public class ContactService(IContactRepository _repository,IUnitOfWork _unitOfWork,IValidator<Contact>_validator) : IContactService
     {
         public async Task<BaseResult<object>> CreateAsync(CreateContactDto createContactDto)
         {

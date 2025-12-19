@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arkitektur.DataAccess.Repositories
+namespace Arkitektur.DataAccess.Repositories.GenericRepositories
 {
     public interface IGenericRepository<TEntity>where TEntity : BaseEntity
     {

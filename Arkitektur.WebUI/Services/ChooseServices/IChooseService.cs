@@ -5,12 +5,8 @@ using Arkitektur.WebUI.Services.GenericServices;
 
 namespace Arkitektur.WebUI.Services.ChooseServices
 {
-    public interface IChooseService:IGenericService<ResultCategoryDto,CreateCategoryDto,UpdateCategoryDto>
+    public interface IChooseService:IGenericService<ResultChooseDto,CreateChooseDto,UpdateChooseDto>
     {
-        Task<BaseResult<List<ResultChooseDto>>> GetAllAsync();
-        Task<BaseResult<UpdateChooseDto>> GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateChooseDto chooseDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateChooseDto chooseDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
+     
     }
 }

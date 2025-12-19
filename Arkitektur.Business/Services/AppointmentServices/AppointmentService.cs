@@ -1,7 +1,7 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.AppointmentDtos;
-
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.AppointmentRepositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using Arkitektur.Entity.Enums;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.AppointmentServices
 {
-    public class AppointmentService(IGenericRepository<Appointment>_repository,IUnitOfWork _unitOfWork,IValidator<Appointment>_validator) : IAppointmentService
+    public class AppointmentService(IAppointmentRepository _repository,IUnitOfWork _unitOfWork,IValidator<Appointment>_validator) : IAppointmentService
     {
         public async Task<BaseResult<object>> ApproveAppointmentAsync(UpdateAppointmentDto appointmentDto)
         {

@@ -1,7 +1,8 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.ChooseDtos;
 using Arkitektur.Business.DTOs.ProjectDtos;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.ChooseRepositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using FluentValidation;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.ChooseServices
 {
-    public class ChooseService(IGenericRepository<Choose>_repository,IUnitOfWork _unitOfWork,IValidator<Choose>_validator) : IChooseService
+    public class ChooseService(IChooseRepository _repository,IUnitOfWork _unitOfWork,IValidator<Choose>_validator) : IChooseService
     {
         public async Task<BaseResult<object>> CreateAsync(CreateChooseDto createChooseDto)
         {

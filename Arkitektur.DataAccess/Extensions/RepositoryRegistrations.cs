@@ -1,5 +1,5 @@
 ﻿using Arkitektur.DataAccess.Interceptors;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using Microsoft.EntityFrameworkCore;

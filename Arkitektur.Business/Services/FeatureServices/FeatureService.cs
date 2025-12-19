@@ -1,6 +1,7 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.FeatureDtos;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.FeatureRepositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using FluentValidation;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.FeatureServices
 {
-    public class FeatureService(IGenericRepository<Feature>_repository,IUnitOfWork _unitOfWork,IValidator<Feature>_validator):IFeatureService
+    public class FeatureService(IFeatureRepository _repository,IUnitOfWork _unitOfWork,IValidator<Feature>_validator):IFeatureService
     {
         public async Task<BaseResult<object>> CreateAsync(CreateFeatureDto createFeatureDto)
         {

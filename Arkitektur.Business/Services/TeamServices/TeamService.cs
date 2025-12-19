@@ -1,6 +1,7 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.TeamDtos;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
+using Arkitektur.DataAccess.Repositories.TeamRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using FluentValidation;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.TeamServices
 {
-    public class TeamService(IGenericRepository<Team>_repository,IUnitOfWork _unitOfWork,IValidator<Team>_validator):ITeamService
+    public class TeamService(ITeamRepository _repository,IUnitOfWork _unitOfWork,IValidator<Team>_validator):ITeamService
     {
         public async Task<BaseResult<object>> CreateAsync(CreateTeamDto createTeamDto)
         {
@@ -63,8 +64,7 @@ namespace Arkitektur.Business.Services.TeamServices
 
         public async Task<BaseResult<List<ResultTeamDto>>> GetTeamWithSocialsAsync()
         {
-            var query =  _repository.GetQueryable();
-            var values=await query.Include(t=>t.TeamSocials).ToListAsync();
+            var values = await _repository.GetTeamsWithSocialsAsync();
             var mappedValues = values.Adapt <List<ResultTeamDto>>();
             return BaseResult<List<ResultTeamDto>>.Success(mappedValues);
         }

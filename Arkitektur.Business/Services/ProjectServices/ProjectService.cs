@@ -1,7 +1,8 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.AboutDtos;
 using Arkitektur.Business.DTOs.ProjectDtos;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
+using Arkitektur.DataAccess.Repositories.ProjectRepositories;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using FluentValidation;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.ProjectServices
 {
-    public class ProjectService(IGenericRepository<Project>_repository,IUnitOfWork _unitOfWork,IValidator<Project>_validator) : IProjectService
+    public class ProjectService(IProjectRepository _repository,IUnitOfWork _unitOfWork,IValidator<Project>_validator) : IProjectService
     {
         public async Task<BaseResult<object>> CreateAsync(CreateProjectDto createProjectDto)
         {
@@ -62,8 +63,7 @@ namespace Arkitektur.Business.Services.ProjectServices
 
         public async Task<BaseResult<List<ResultProjectDto>>> GetProjectsWithCategories()
         {
-            var queryble = _repository.GetQueryable();
-            var products=await queryble.Include(x=>x.Category).ToListAsync();
+            var products = await _repository.GetProjectsWithCategoriesAsync();
             var mappedValue = products.Adapt<List<ResultProjectDto>>();
             return BaseResult<List<ResultProjectDto>>.Success(mappedValue);
         }

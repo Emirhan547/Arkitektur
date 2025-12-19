@@ -1,6 +1,7 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.TestimonialDtos;
-using Arkitektur.DataAccess.Repositories;
+using Arkitektur.DataAccess.Repositories.GenericRepositories;
+using Arkitektur.DataAccess.Repositories.TestimonialServices;
 using Arkitektur.DataAccess.UOW;
 using Arkitektur.Entity.Entities;
 using FluentValidation;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.TestimonialServices
 {
-    public class TestimonialService(IGenericRepository<Testimonial> _repository, IUnitOfWork _unitOfWork, IValidator<Testimonial> _validator) : ITestimonialService
+    public class TestimonialService(ITestimonialRepository _repository, IUnitOfWork _unitOfWork, IValidator<Testimonial> _validator) : ITestimonialService
     {
         
             public async Task<BaseResult<object>> CreateAsync(CreateTestimonialDto createTestimonialDto)
