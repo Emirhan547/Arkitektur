@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -24,12 +23,44 @@
     <!-- Footer Start -->
     @await Component.InvokeAsync("_UILayoutFooter")
     <!-- Footer End -->
+    <!-- Chat Assistant -->
+    <button id="chatAssistantToggle" class="chat-toggle-btn d-flex align-items-center justify-content-center" aria-expanded="false" aria-controls="chatAssistantPanel">
+        <span class="visually-hidden">Open assistant chat</span>
+        <span aria-hidden="true">💬</span>
+    </button>
+
+    <section id="chatAssistantPanel" class="chat-panel shadow-lg" aria-live="polite">
+        <div class="chat-panel__header d-flex align-items-center justify-content-between">
+            <div>
+                <p class="mb-0 fw-semibold">Arkitektur Asistanı</p>
+                <small class="text-muted">Sorularınızı yanıtlamak için buradayım.</small>
+            </div>
+            <button type="button" class="btn btn-link text-decoration-none text-muted p-0 chat-panel__close" aria-label="Kapat">
+                <span aria-hidden="true">✕</span>
+            </button>
+        </div>
+        <div class="chat-panel__body">
+            <ul id="chatAssistantMessages" class="list-unstyled mb-0"></ul>
+        </div>
+        <form id="chatAssistantForm" class="chat-panel__footer">
+            <label class="form-label w-100 mb-2" for="chatAssistantInput">Sorunuzu yazın</label>
+            <div class="input-group">
+                <textarea id="chatAssistantInput" class="form-control" rows="2" placeholder="Örn: Randevu nasıl alırım?" required></textarea>
+                <button class="btn btn-primary" type="submit">
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    Gönder
+                </button>
+            </div>
+        </form>
+    </section>
+
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     @await Component.InvokeAsync("_UILayoutScript")
     <!-- JavaScript Libraries -->
- 
+
 </body>
 
 </html>

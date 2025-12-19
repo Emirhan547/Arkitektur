@@ -10,7 +10,7 @@ namespace Arkitektur.WebUI.Extensions
         public static void AddServiceRegistrationsExt(this IServiceCollection services,IConfiguration configuration)
         {
             services.Configure<ApiOptions>(configuration.GetSection(nameof(ApiOptions)));
-
+            services.Configure<OpenAiOptions>(configuration.GetSection("OpenAI"));
             services.AddScoped<ITokenService,TokenService>();
             services.AddScoped<TokenHandler>();
         }
