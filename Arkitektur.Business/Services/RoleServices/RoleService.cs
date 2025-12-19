@@ -4,32 +4,28 @@ using Arkitektur.Entity.Entities;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Arkitektur.Business.Services.RoleServices
+namespace Arkitektur.Business.Services.RoleServices;
+
+public class RoleService(RoleManager<AppRole> roleManager) : IRoleService
 {
-    public class RoleService(RoleManager<AppRole>_roleManager) : IRoleService
+    public async Task<BaseResult<object>> CreateRole(CreateRoleDto roleDto)
     {
-        public async Task<BaseResult<object>> CreateRole(CreateRoleDto roleDto)
+        var role = roleDto.Adapt<AppRole>();
+
+        var result = await roleManager.CreateAsync(role);
+        if (!result.Succeeded)
         {
-            var role=roleDto.Adapt<AppRole>();
-            var result=await _roleManager.CreateAsync(role);
-            if (!result.Succeeded)
-            {
-                return BaseResult<object>.Fail(result.Errors);
-            }
-            return BaseResult<object>.Success(new{Message="Role Created Succesfully." });
+            return BaseResult<object>.Fail(result.Errors);
         }
 
-        public async Task<BaseResult<List<ResultRoleDto>>> GetAllRolesAsync()
-        {
-            var roles=_roleManager.Roles.ToListAsync();
-            var resultRoles=roles.Result.Adapt<List<ResultRoleDto>>();
-            return BaseResult<List<ResultRoleDto>>.Success(resultRoles);
-        }
+        return BaseResult<object>.Success(new { Message = "Role Created Successfully." });
+    }
+
+    public async Task<BaseResult<List<ResultRoleDto>>> GetAllRolesAsync()
+    {
+        var roles = await roleManager.Roles.ToListAsync();
+        var mappedResult = roles.Adapt<List<ResultRoleDto>>();
+        return BaseResult<List<ResultRoleDto>>.Success(mappedResult);
     }
 }

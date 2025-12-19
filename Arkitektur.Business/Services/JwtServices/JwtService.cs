@@ -11,7 +11,7 @@ using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegiste
 
 namespace Arkitektur.Business.Services.JwtServices;
 
-public class JwtService(IOptions<JwtTokenOptions> tokenOptions, UserManager<AppUser> userManager) : IJwtService
+public class JwtService(IOptions<JwtTokenOptions> tokenOptions, UserManager<AppUser> userManager): IJwtService
 {
     private readonly JwtTokenOptions _tokenOptions = tokenOptions.Value;
 
@@ -31,7 +31,7 @@ public class JwtService(IOptions<JwtTokenOptions> tokenOptions, UserManager<AppU
 
         foreach (var role in userRoles)
         {
-            claims.Add(new Claim(ClaimTypes.Role, role));
+            claims.Add(new Claim(ClaimTypes.Role,role));
         }
 
         JwtSecurityToken jwtSecurityToken = new

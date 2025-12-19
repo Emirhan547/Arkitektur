@@ -1,35 +1,39 @@
-﻿using Arkitektur.Business.DTOs.UserDtos;
+﻿using Arkitektur.Business.DTOs.TokenDtos;
+using Arkitektur.Business.DTOs.UserDtos;
 using Arkitektur.Business.Services.UserServices;
+using Arkitektur.Entity.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Arkitektur.API.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
+namespace Arkitektur.API.Controllers;
 
-    public class UsersController(IUserService _userService) : ControllerBase
+[Route("api/[controller]")]
+[ApiController]
+
+public class UsersController(IUserService userService) : ControllerBase
+{
+    [AllowAnonymous]
+    [HttpPost("register")]
+    public async Task<IActionResult> CreateUser(CreateUserDto userDto)
     {
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public async Task<IActionResult> CreateUser(CreateUserDto userDto)
-        {
-            var response = await _userService.CreateUserAsync(userDto);
-            return response.IsSuccessful ? Ok(response) : BadRequest(response);
-        }
-        [AllowAnonymous]
-        [HttpPost("login")]
-        public async Task<ActionResult> Login(LoginDto loginDto)
-        {
-            var response = await _userService.LoginAsync(loginDto);
-            return response.IsSuccessful ? Ok(response) : BadRequest(response);
-        }
-        [HttpGet]
-        public async Task<ActionResult<List<ResultUserDto>>> GetAllUsers()
-        {
-            var response = await _userService.GetAllUsersAsync();
-            return response.IsSuccessful ? Ok(response) : BadRequest(response);
-        }
+        var response = await userService.CreateUserAsync(userDto);
+        return response.IsSuccessful ? Ok(response) : BadRequest(response);
     }
+    [AllowAnonymous]
+    [HttpPost("login")]
+    public async Task<ActionResult<TokenResponseDto>> Login(LoginDto loginDto)
+    {
+        var response = await userService.LoginAsync(loginDto);
+        return response.IsSuccessful ? Ok(response) : BadRequest(response);
+    }
+
+
+    [HttpGet]
+    public async Task<ActionResult<List<ResultUserDto>>> GetAllUsers()
+    {
+        var response = await userService.GetAllUsersAsync();
+        return response.IsSuccessful ? Ok(response) : BadRequest(response);
+    }
+
+
 }

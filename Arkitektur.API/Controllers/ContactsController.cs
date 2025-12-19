@@ -19,6 +19,7 @@ namespace Arkitektur.API.Controllers
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
 
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<List<ResultContactDto>>> GetById(int id)
         {
@@ -31,12 +32,14 @@ namespace Arkitektur.API.Controllers
             var response = await _contactService.CreateAsync(createContactDto);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
+
         [HttpPut]
         public async Task<IActionResult> Update(UpdateContactDto updateContactDto)
         {
             var response = await _contactService.UpdateAsync(updateContactDto);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

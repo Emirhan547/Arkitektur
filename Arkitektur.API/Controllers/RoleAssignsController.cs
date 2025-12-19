@@ -11,13 +11,14 @@ namespace Arkitektur.API.Controllers
 
     public class RoleAssignsController(IRoleAssignService _roleAssignService) : ControllerBase
     {
+
         [HttpGet("{id}")]
         public async Task<ActionResult<List<AssignRoleDto>>> GetUserForRoleAssign(int id)
         {
            var response= await _roleAssignService.GetUserForRoleAssignAsync(id);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
-
+ 
         [HttpPost]
         public async Task<ActionResult> AssignRole(List<AssignRoleDto>assignRoleDtos)
         {

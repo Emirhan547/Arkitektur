@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area(Area.Admin)]
+    [Area(Roles.Admin)]
     [Authorize(Roles = Roles.Admin)]
     public class FeatureController(IFeatureService _featureService) : Controller
     {

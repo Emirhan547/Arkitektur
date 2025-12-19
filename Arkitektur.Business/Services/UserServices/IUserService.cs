@@ -1,18 +1,16 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.TokenDtos;
 using Arkitektur.Business.DTOs.UserDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Arkitektur.Business.Services.UserServices
+namespace Arkitektur.Business.Services.UserServices;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        Task<BaseResult<object>> CreateUserAsync(CreateUserDto userDto);
-        Task<BaseResult<TokenResponseDto>> LoginAsync(LoginDto loginDto);
-        Task<BaseResult<List<ResultUserDto>>>GetAllUsersAsync();
-    }
+
+    Task<BaseResult<object>> CreateUserAsync(CreateUserDto userDto);
+
+    Task<BaseResult<TokenResponseDto>> LoginAsync(LoginDto loginDto);
+
+    Task<BaseResult<List<ResultUserDto>>> GetAllUsersAsync();
+
 }

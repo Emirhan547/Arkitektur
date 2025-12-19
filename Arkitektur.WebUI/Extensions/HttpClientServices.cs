@@ -14,68 +14,91 @@ using Arkitektur.WebUI.Services.TeamServices;
 using Arkitektur.WebUI.Services.TeamSocialServices;
 using Arkitektur.WebUI.Services.UserServices;
 
-namespace Arkitektur.WebUI.Extensions
+namespace Arkitektur.WebUI.Extensions;
+
+public static class HttpClientServices
 {
-    public static class HttpClientServices
+
+    public static void AddHttpClientServices(this IServiceCollection services, IConfiguration configuration)
     {
-        public static void AddHttpClientServices(this IServiceCollection services, IConfiguration configuration)
+
+        var apiOptions = configuration.GetSection(nameof(ApiOptions)).Get<ApiOptions>();
+
+        services.AddHttpClient<ICategoryService, CategoryService>(options =>
         {
-            var apiOptions= configuration.GetSection(nameof(ApiOptions)).Get<ApiOptions>();
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
 
-            services.AddHttpClient<ICategoryService, CategoryService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IProjectService, ProjectService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IFileService, FileService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IAboutService, AboutService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IBannerService, BannerService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IAppointmentService, AppointmentService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IChooseService, ChooseService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IContactService, ContactService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IFeatureService, FeatureService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<IUserService, UserService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
+        }).AddHttpMessageHandler<TokenHandler>();
 
-            services.AddHttpClient<ITeamService, TeamService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-            services.AddHttpClient<ITeamSocialService, TeamSocialService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
+        services.AddHttpClient<IProjectService, ProjectService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
 
-            services.AddHttpClient<ITestimonialService, TestimonialService>(client =>
-            {
-                client.BaseAddress = new Uri(apiOptions.BaseUrl);
-            }).AddHttpMessageHandler<TokenHandler>();
-        }
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<IAboutService, AboutService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<IBannerService, BannerService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<IAppointmentService, AppointmentService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<IChooseService, ChooseService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<IContactService, ContactService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<IFeatureService, FeatureService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<IUserService, UserService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<ITeamService, TeamService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<IFileService, FileService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<ITeamSocialService, TeamSocialService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+        }).AddHttpMessageHandler<TokenHandler>();
+
+        services.AddHttpClient<ITestimonialService, TestimonialService>(options =>
+        {
+            options.BaseAddress = new Uri(apiOptions.BaseUrl);
+        }).AddHttpMessageHandler<TokenHandler>();
     }
+
+
 }

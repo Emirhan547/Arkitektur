@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area(Area.Admin)]
-    [Authorize(Roles = Roles.Admin)]
+    [Area(Roles.Admin)]
+    [Authorize(Roles=Roles.Admin)]
     public class AboutController(IAboutService _aboutService) : Controller
     {
         public async Task<IActionResult> Index()

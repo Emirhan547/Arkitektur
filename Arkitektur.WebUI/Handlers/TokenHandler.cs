@@ -15,12 +15,9 @@ public class TokenHandler(IHttpContextAccessor _contextAccessor, ITokenService _
 
         if (response.StatusCode == HttpStatusCode.Unauthorized)
         {
-            var httpContext = _contextAccessor.HttpContext;
-            if (httpContext != null)
-            {
-                await httpContext.SignOutAsync();
-                httpContext.Response.Redirect("/Auth/Login");
-            }
+            await _contextAccessor.HttpContext.SignOutAsync();
+
+            _contextAccessor.HttpContext.Response.Redirect("/Auth/Login");
         }
 
         return response;

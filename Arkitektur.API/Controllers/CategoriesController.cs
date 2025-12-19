@@ -27,6 +27,7 @@ namespace Arkitektur.API.Controllers
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
 
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<List<ResultCategoryDto>>> GetById(int id)
         {
@@ -39,12 +40,14 @@ namespace Arkitektur.API.Controllers
             var response = await _categoryService.CreateAsync(createCategoryDto);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
+
         [HttpPut]
         public async Task<IActionResult> Update(UpdateCategoryDto updateCategoryDto)
         {
             var response = await _categoryService.UpdateAsync(updateCategoryDto);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
@@ -22,3 +22,5 @@
 <!-- Appointment End -->
 <!-- Testimonial Start -->
 @await Component.InvokeAsync("_HomeTestimonial")
+<div>API result</div>
+<div>@ViewData["ApiResult"]</div>

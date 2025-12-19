@@ -11,7 +11,8 @@ builder.Services.AddServiceRegistrationsExt(builder.Configuration);
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(JwtBearerDefaults
+        .AuthenticationScheme)
     .AddCookie(JwtBearerDefaults.AuthenticationScheme, options =>
     {
         options.LoginPath = "/Auth/Login";

@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area(Area.Admin)]
-    [Authorize(Roles=Roles.Admin)]
+    [Area(Roles.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public class TeamSocialController(ITeamSocialService _teamSocialService,ITeamService _teamService) : Controller
     {
         private async Task GetTeams()

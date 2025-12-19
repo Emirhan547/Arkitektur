@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area(Area.Admin)]
+    [Area(Roles.Admin)]
     [Authorize(Roles = Roles.Admin)]
     public class TeamController(ITeamService _teamService) : Controller
     {

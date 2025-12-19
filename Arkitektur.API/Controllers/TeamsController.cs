@@ -26,24 +26,28 @@ namespace Arkitektur.API.Controllers
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
 
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<List<ResultTeamDto>>> GetById(int id)
         {
             var response = await _teamService.GetByIdAsync(id);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateTeamDto createAboutDto)
         {
             var response = await _teamService.CreateAsync(createAboutDto);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
+
         [HttpPut]
         public async Task<IActionResult> Update(UpdateTeamDto updateAboutDto)
         {
             var response = await _teamService.UpdateAsync(updateAboutDto);
             return response.IsSuccessful ? Ok(response) : BadRequest(response);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

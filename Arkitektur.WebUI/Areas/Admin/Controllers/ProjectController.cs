@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.WebUI.Areas.Admin.Controllers
 {
-    [Area(Area.Admin)]
+    [Area(Roles.Admin)]
     [Authorize(Roles = Roles.Admin)]
     public class ProjectController(IProjectService _projectService, ICategoryService _categoryService) : Controller
     {

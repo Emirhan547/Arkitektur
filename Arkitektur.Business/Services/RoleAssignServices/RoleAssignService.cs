@@ -9,56 +9,68 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arkitektur.Business.Services.RoleAssignServices
+namespace Arkitektur.Business.Services.RoleAssignServices;
+
+public class RoleAssignService(UserManager<AppUser> _userManager, RoleManager<AppRole> _roleManager) : IRoleAssignService
 {
-    public class RoleAssignService(UserManager<AppUser> _userManager, RoleManager<AppRole> _roleManager) : IRoleAssignService
+    public async Task<BaseResult<object>> AssignRoleAsync(List<AssignRoleDto> assignRoleDtos)
     {
-        public async Task<BaseResult<object>> AssignRoleAsync(List<AssignRoleDto> assignRoleDtos)
+        var userId = assignRoleDtos.Select(x => x.UserId).FirstOrDefault();
+
+        var user = await _userManager.FindByIdAsync(userId.ToString());
+        if (user is null)
         {
-            var userId = assignRoleDtos.Select(x=>x.UserId).FirstOrDefault();
-            var user=await _userManager.FindByIdAsync(userId.ToString());
-            if (user is null)
-            {
-                return BaseResult<object>.Fail("User Not Found");
-            }
-            foreach (var assignRole in assignRoleDtos)
-            {
-                if (assignRole.RoleExist)
-                {
-                    await _userManager.AddToRoleAsync(user, assignRole.RoleName);
-                }
-                else
-                {
-                    await _userManager.RemoveFromRoleAsync(user, assignRole.RoleName);
-                }
-                    
-            }
-            return BaseResult<object>.Success(new {Message="Role Assign Succesfully"});
+            return BaseResult<object>.Fail("User Not Found");
         }
 
-        public async Task<BaseResult<List<AssignRoleDto>>> GetUserForRoleAssignAsync(int id)
+        foreach (var assignRole in assignRoleDtos)
         {
-            var user=await _userManager.FindByIdAsync(id.ToString());
-            if (user is null)
+            if (assignRole.RoleExist)
             {
-                return BaseResult<List<AssignRoleDto>>.Fail("User Not Found");
+                await _userManager.AddToRoleAsync(user, assignRole.RoleName);
             }
-            var roles =await _roleManager.Roles.ToListAsync();
-            var userRoles = await _userManager.GetRolesAsync(user);
-            var roleAssignments = new List<AssignRoleDto>();
-            foreach (var role in roles)
+            else
             {
-                var assignRoleDto = new AssignRoleDto
-                {
-                    UserId = user.Id,
-                    FullName = user.FirstName+" "+user.LastName,
-                    RoleId = role.Id,
-                    RoleName = role.Name,
-                    RoleExist = userRoles.Contains(role.Name)
-                };
-                roleAssignments.Add(assignRoleDto);
+                await _userManager.RemoveFromRoleAsync(user, assignRole.RoleName);
             }
-            return BaseResult<List<AssignRoleDto>>.Success(roleAssignments);
+
+
+
         }
+
+        return BaseResult<object>.Success(new { Message = "Role Assign Successful" });
+    }
+
+    public async Task<BaseResult<List<AssignRoleDto>>> GetUserForRoleAssignAsync(int id)
+    {
+        var user = await _userManager.FindByIdAsync(id.ToString());
+
+        if (user is null)
+        {
+            return BaseResult<List<AssignRoleDto>>.Fail("User Not Found");
+        }
+
+        var roles = await _roleManager.Roles.ToListAsync();
+
+        var userRoles = await _userManager.GetRolesAsync(user);
+
+        var roleAssignments = new List<AssignRoleDto>();
+
+        foreach (var role in roles)
+        {
+            var assignRole = new AssignRoleDto
+            {
+
+                UserId = user.Id,
+                FullName = user.FirstName + " " + user.LastName,
+                RoleId = role.Id,
+                RoleName = role.Name,
+                RoleExist = userRoles.Contains(role.Name)
+            };
+            roleAssignments.Add(assignRole);
+
+        }
+
+        return BaseResult<List<AssignRoleDto>>.Success(roleAssignments);
     }
 }
