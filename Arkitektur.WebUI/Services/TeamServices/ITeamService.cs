@@ -1,15 +1,12 @@
 ﻿using Arkitektur.WebUI.Base;
 using Arkitektur.WebUI.DTOs.TeamDtos;
+using Arkitektur.WebUI.Services.GenericServices;
 
 namespace Arkitektur.WebUI.Services.TeamServices
 {
-    public interface ITeamService
+    public interface ITeamService:IGenericService<ResultTeamDto,CreateTeamDto,UpdateTeamDto>
     {
-        Task<BaseResult<List<ResultTeamDto>>> GetAllAsync();
         Task<BaseResult<List<ResultTeamDto>>> GetTeamsWithSocialsAsync();
-        Task<BaseResult<UpdateTeamDto>> GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateTeamDto teamDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateTeamDto teamDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
+
     }
 }

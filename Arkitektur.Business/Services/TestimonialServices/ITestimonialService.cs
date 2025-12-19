@@ -1,15 +1,11 @@
 ﻿
 using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.TestimonialDtos;
+using Arkitektur.Business.Services.IGenericServices;
 
 namespace Arkitektur.Business.Services.TestimonialServices
 {
-    public interface ITestimonialService
+    public interface ITestimonialService:IGenericService<ResultTestimonialDto,CreateTestimonialDto,UpdateTestimonialDto>
     {
-        Task<BaseResult<List<ResultTestimonialDto>>> GetAllAsync();
-        Task<BaseResult<ResultTestimonialDto>> GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateTestimonialDto createTestimonialDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateTestimonialDto updateTestimonialDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
     }
 }

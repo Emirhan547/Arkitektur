@@ -1,6 +1,7 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.AboutDtos;
 using Arkitektur.Business.DTOs.ProjectDtos;
+using Arkitektur.Business.Services.IGenericServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,9 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.ProjectServices
 {
-    public interface IProjectService
+    public interface IProjectService:IGenericService<ResultProjectDto,CreateProjectDto,UpdateProjectDto>
     {
-        Task<BaseResult<List<ResultProjectDto>>> GetAllAsync();
         Task<BaseResult<List<ResultProjectDto>>> GetProjectsWithCategories();
-        Task<BaseResult<ResultProjectDto>> GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateProjectDto createProjectDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateProjectDto updateProjectDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
+
     }
 }

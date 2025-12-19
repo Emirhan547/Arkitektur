@@ -1,4 +1,4 @@
-﻿using Arkitektur.WebUI.Services;
+﻿using Arkitektur.WebUI.Services.TestimonialServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arkitektur.WebUI.ViewComponents.HomeComponents

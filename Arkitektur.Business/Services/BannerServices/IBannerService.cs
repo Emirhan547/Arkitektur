@@ -1,6 +1,6 @@
-﻿using Arkitektur.Business.Base;
-using Arkitektur.Business.DTOs.AboutDtos;
+﻿
 using Arkitektur.Business.DTOs.BannerDtos;
+using Arkitektur.Business.Services.IGenericServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +9,8 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.BannerServices
 {
-    public interface IBannerService
+    public interface IBannerService:IGenericService<ResultBannerDto, CreateBannerDto, UpdateBannerDto>
     {
-        Task<BaseResult<List<ResultBannerDto>>> GetAllAsync();
-        Task<BaseResult<ResultBannerDto>> GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateBannerDto createBannerDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateBannerDto updateBannerDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
+ 
     }
 }

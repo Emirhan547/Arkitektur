@@ -1,14 +1,11 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.CategoryDtos;
+using Arkitektur.Business.Services.IGenericServices;
 
 namespace Arkitektur.Business.Services.CategoryServices;
 
-public interface ICategoryService
+public interface ICategoryService:IGenericService<ResultCategoryDto,CreateCategoryDto,UpdateCategoryDto>
 {
-    Task<BaseResult<List<ResultCategoryDto>>> GetAllAsync();
     Task<BaseResult<List<ResultCategoriesWithProjectsDto>>> GetCategoriesWithProjectsAsync();
-    Task<BaseResult<ResultCategoryDto>> GetByIdAsync(int id);
-    Task<BaseResult<object>> CreateAsync(CreateCategoryDto categoryDto);
-    Task<BaseResult<object>> DeleteAsync(int id);
-    Task<BaseResult<object>> UpdateAsync(UpdateCategoryDto categoryDto);
+
 }

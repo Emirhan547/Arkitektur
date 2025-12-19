@@ -1,14 +1,11 @@
 ﻿using Arkitektur.WebUI.Base;
 using Arkitektur.WebUI.DTOs.ContactDtos;
+using Arkitektur.WebUI.Services.GenericServices;
 
 namespace Arkitektur.WebUI.Services.ContactServices
 {
-    public interface IContactService
+    public interface IContactService:IGenericService<ResultContactDto,CreateContactDto,UpdateContactDto>
     {
-        Task<BaseResult<List<ResultContactDto>>> GetAllAsync();
-        Task<BaseResult<UpdateContactDto>> GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateContactDto contactDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateContactDto contactDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
+       
     }
 }

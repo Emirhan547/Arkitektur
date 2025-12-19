@@ -1,14 +1,11 @@
 ﻿using Arkitektur.WebUI.Base;
 using Arkitektur.WebUI.DTOs.BannerDtos;
+using Arkitektur.WebUI.Services.GenericServices;
 
 namespace Arkitektur.WebUI.Services.BannerServices
 {
-    public interface IBannerService
+    public interface IBannerService:IGenericService<ResultBannerDto,CreateBannerDto,UpdateBannerDto>
     {
-        Task<BaseResult<List<ResultBannerDto>>> GetAllAsync();
-        Task<BaseResult<UpdateBannerDto>> GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateBannerDto bannerDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateBannerDto bannerDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
+        
     }
 }

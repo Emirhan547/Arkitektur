@@ -1,14 +1,11 @@
 ﻿using Arkitektur.WebUI.Base;
 using Arkitektur.WebUI.DTOs.FeatureDtos;
+using Arkitektur.WebUI.Services.GenericServices;
 
 namespace Arkitektur.WebUI.Services.FeatureServices
 {
-    public interface IFeatureService
+    public interface IFeatureService:IGenericService<ResultFeatureDto,CreateFeatureDto,UpdateFeatureDto>
     {
-        Task<BaseResult<List<ResultFeatureDto>>> GetAllAsync();
-        Task<BaseResult<UpdateFeatureDto>> GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateFeatureDto featureDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateFeatureDto featureDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
+      
     }
 }

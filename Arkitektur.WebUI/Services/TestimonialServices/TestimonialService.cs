@@ -3,7 +3,7 @@ using Arkitektur.WebUI.DTOs.TestimonialDtos;
 using Arkitektur.WebUI.Exceptions;
 using Arkitektur.WebUI.Services.FileServices;
 
-namespace Arkitektur.WebUI.Services
+namespace Arkitektur.WebUI.Services.TestimonialServices
 {
     public class TestimonialService(HttpClient _client,IFileService _fileService) : ITestimonialService
     {

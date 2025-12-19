@@ -1,6 +1,6 @@
 ﻿using Arkitektur.WebUI.Consts;
 using Arkitektur.WebUI.DTOs.TestimonialDtos;
-using Arkitektur.WebUI.Services;
+using Arkitektur.WebUI.Services.TestimonialServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

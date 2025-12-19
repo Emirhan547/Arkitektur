@@ -1,6 +1,5 @@
 ﻿using Arkitektur.WebUI.Handlers;
 using Arkitektur.WebUI.Options;
-using Arkitektur.WebUI.Services;
 using Arkitektur.WebUI.Services.AboutServices;
 using Arkitektur.WebUI.Services.AppointmentServices;
 using Arkitektur.WebUI.Services.BannerServices;
@@ -12,6 +11,7 @@ using Arkitektur.WebUI.Services.FileServices;
 using Arkitektur.WebUI.Services.ProjectServices;
 using Arkitektur.WebUI.Services.TeamServices;
 using Arkitektur.WebUI.Services.TeamSocialServices;
+using Arkitektur.WebUI.Services.TestimonialServices;
 using Arkitektur.WebUI.Services.UserServices;
 
 namespace Arkitektur.WebUI.Extensions;

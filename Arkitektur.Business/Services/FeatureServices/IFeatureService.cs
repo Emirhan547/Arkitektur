@@ -1,6 +1,7 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.AboutDtos;
 using Arkitektur.Business.DTOs.FeatureDtos;
+using Arkitektur.Business.Services.IGenericServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,8 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.FeatureServices
 {
-    public interface IFeatureService
+    public interface IFeatureService:IGenericService<ResultFeatureDto,CreateFeatureDto,UpdateFeatureDto>
     {
-        Task<BaseResult<List<ResultFeatureDto>>> GetAllAsync();
-        Task<BaseResult<ResultFeatureDto>> GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateFeatureDto createFeatureDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateFeatureDto updateFeatureDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
+     
     }
 }

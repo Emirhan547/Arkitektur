@@ -1,5 +1,6 @@
 ﻿using Arkitektur.Business.Base;
 using Arkitektur.Business.DTOs.AboutDtos;
+using Arkitektur.Business.Services.IGenericServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,8 @@ using System.Threading.Tasks;
 
 namespace Arkitektur.Business.Services.AboutServices
 {
-    public interface IAboutService
+    public interface IAboutService:IGenericService<ResultAboutDto,CreateAboutDto,UpdateAboutDto>
     {
-        Task<BaseResult<List<ResultAboutDto>>> GetAllAsync();
-        Task<BaseResult<ResultAboutDto>>GetByIdAsync(int id);
-        Task<BaseResult<object>> CreateAsync(CreateAboutDto createAboutDto);
-        Task<BaseResult<object>> UpdateAsync(UpdateAboutDto updateAboutDto);
-        Task<BaseResult<object>> DeleteAsync(int id);
 
     }
 }
