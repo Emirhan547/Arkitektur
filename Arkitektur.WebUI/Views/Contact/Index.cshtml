@@ -1,0 +1,77 @@
+﻿@model List<Arkitektur.WebUI.DTOs.ContactDtos.ResultContactDto>
+@{
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+    ViewData["Title"] = "İletişim";
+}
+
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container text-center py-5">
+        <h1 class="display-4 text-white animated slideInDown mb-3">İletişim</h1>
+        <p class="text-white mb-0">Bizimle dilediğiniz an iletişime geçin</p>
+    </div>
+</div>
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <h4 class="section-title">İletişim Bilgileri</h4>
+                <h1 class="display-5 mb-4">Sizin için buradayız</h1>
+                @if (Model is { Count: > 0 })
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-light"
+                                     style="width: 65px; height: 65px;">
+                                    <i class="fa fa-2x fa-phone-alt text-primary"></i>
+                                </div>
+                                <div class="ms-4">
+                                    <p class="mb-1">Telefon</p>
+                                    <h4 class="mb-0">@item.PhoneNumber</h4>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-light"
+                                     style="width: 65px; height: 65px;">
+                                    <i class="fa fa-2x fa-envelope-open text-primary"></i>
+                                </div>
+                                <div class="ms-4">
+                                    <p class="mb-1">E-Posta</p>
+                                    <h4 class="mb-0">@item.Email</h4>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-info mb-0">İletişim bilgileri henüz eklenmemiş.</div>
+                }
+            </div>
+            <div class="col-lg-6">
+                <div class="bg-light p-5 h-100 rounded wow fadeIn" data-wow-delay="0.3s">
+                    <h4 class="section-title">Hızlı Mesaj</h4>
+                    <p class="mb-4">Mesajınızı iletin, ekibimiz en kısa sürede dönüş yapsın.</p>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <input type="text" class="form-control" placeholder="Ad Soyad" required>
+                            </div>
+                            <div class="col-12">
+                                <input type="email" class="form-control" placeholder="E-Posta" required>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="5" placeholder="Mesajınız" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="button">Gönder</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@model List<ResultFeatureDto>
+@{
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+    ViewData["Title"] = "Hizmetlerimiz";
+}
+
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container text-center py-5">
+        <h1 class="display-4 text-white animated slideInDown mb-3">Hizmetlerimiz</h1>
+        <p class="text-white mb-0">Modern mimari ve iç mimarlık alanındaki tüm çözümlerimiz</p>
+    </div>
+</div>
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h4 class="section-title">Hizmetlerimiz</h4>
+            <h1 class="display-5 mb-4">Size özel tasarlanan mimari ve iç mimarlık hizmetleri</h1>
+        </div>
+        <div class="row g-4">
+            @if (Model is { Count: > 0 })
+            {
+                foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item d-flex position-relative text-center h-100">
+                            <img class="bg-img" src="@item.BackgroundImage" alt="@item.Title">
+                            <div class="service-text p-5">
+                                <i class="mb-4 @item.Icon fa-6x" aria-hidden="true"></i>
+                                <h3 class="mb-3">@item.Title</h3>
+                                <p class="mb-4">@item.Description</p>
+                                <span class="text-primary fw-semibold">Detayı Gör</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12">
+                    <div class="alert alert-info mb-0">Henüz yayınlanmış bir hizmet bulunmuyor.</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

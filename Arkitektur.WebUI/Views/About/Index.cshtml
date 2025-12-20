@@ -1,0 +1,53 @@
+﻿@model List<Arkitektur.WebUI.DTOs.AboutDtos.ResultAboutDto>
+@{
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+    ViewData["Title"] = "Hakkımızda";
+}
+
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container text-center py-5">
+        <h1 class="display-4 text-white animated slideInDown mb-3">Hakkımızda</h1>
+        <p class="text-white mb-0">Modern mimari ve iç mimarlıkta bize dair her şey</p>
+    </div>
+</div>
+
+@if (Model is { Count: > 0 })
+{
+    foreach (var item in Model)
+    {
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="about-img">
+                            <img class="img-fluid" src="/arkitektur-1.0.0/img/about-1.jpg" alt="Statik kapak görseli">
+                            <img class="img-fluid" src="@item.ImageUrl" alt="@item.Title">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h4 class="section-title">Hakkımızda</h4>
+                        <h1 class="display-5 mb-4">@item.Title</h1>
+                        <p class="mb-4">@item.Description</p>
+                        <div class="d-flex align-items-center">
+                            <div class="d-flex flex-shrink-0 align-items-center justify-content-center border border-5 border-primary"
+                                 style="width: 120px; height: 120px;">
+                                <h1 class="display-1 mb-n2" data-toggle="counter-up">@(DateTime.Now.Year - item.StartYear)</h1>
+                            </div>
+                            <div class="ps-4">
+                                <h3>Yıllık</h3>
+                                <h3>Çalışma</h3>
+                                <h3 class="mb-0">Tecrübesi</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="container py-5">
+        <div class="alert alert-info mb-0">Hakkımızda bilgisi henüz eklenmemiş.</div>
+    </div>
+}
