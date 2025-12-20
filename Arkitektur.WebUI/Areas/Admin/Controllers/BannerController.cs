@@ -36,7 +36,7 @@ namespace Arkitektur.WebUI.Areas.Admin.Controllers
             await _bannerService.UpdateAsync(bannerDto);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> DeletBanner(int id)
+        public async Task<IActionResult> DeleteBanner(int id)
         {
             await _bannerService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));

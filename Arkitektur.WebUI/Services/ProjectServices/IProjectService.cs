@@ -8,5 +8,6 @@ namespace Arkitektur.WebUI.Services.ProjectServices
     {
         Task<BaseResult<List<ResultProjectDto>>> GetProjectsWithCategoriesAsync();
 
+        Task<BaseResult<ResultProjectDto>> GetDetailAsync(int id);
     }
 }

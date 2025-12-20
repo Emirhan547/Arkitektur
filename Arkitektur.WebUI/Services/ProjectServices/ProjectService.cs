@@ -46,6 +46,11 @@ namespace Arkitektur.WebUI.Services.ProjectServices
             return await _client.GetFromJsonAsync<BaseResult<UpdateProjectDto>>($"projects/{id}");
         }
 
+        public async Task<BaseResult<ResultProjectDto>> GetDetailAsync(int id)
+        {
+            return await _client.GetFromJsonAsync<BaseResult<ResultProjectDto>>($"projects/{id}");
+        }
+
         public async Task<BaseResult<List<ResultProjectDto>>> GetProjectsWithCategoriesAsync()
         {
             return await _client.GetFromJsonAsync<BaseResult<List<ResultProjectDto>>>("projects/WithCategories");

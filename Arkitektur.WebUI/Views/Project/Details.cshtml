@@ -1,0 +1,63 @@
+﻿@model ResultProjectDto
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="container-fluid p-0 mb-5">
+    <div class="position-relative">
+        <img src="@Model.ImageUrl" class="img-fluid w-100" style="max-height: 520px; object-fit: cover;" alt="@Model.Title">
+        <div class="position-absolute top-50 start-0 translate-middle-y w-100">
+            <div class="container">
+                <div class="row justify-content-start">
+                    <div class="col-lg-8">
+                        <div class="bg-white p-4 p-lg-5 shadow wow fadeInLeft" data-wow-delay="0.2s">
+                            <h4 class="section-title text-primary mb-2">Projeler</h4>
+                            <h1 class="display-5 mb-3">@Model.Title</h1>
+                            <p class="lead mb-0">@Model.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.1s">
+                <h4 class="section-title">Detaylar</h4>
+                <h2 class="display-6 mb-4">Tasarımın öne çıkan noktaları</h2>
+                <p class="mb-4">@Model.Description</p>
+                <ul class="list-unstyled">
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="fa fa-check text-primary me-3 mt-1"></i>
+                        <span>@Model.Item1</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="fa fa-check text-primary me-3 mt-1"></i>
+                        <span>@Model.Item2</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="fa fa-check text-primary me-3 mt-1"></i>
+                        <span>@Model.Item3</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="bg-light p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <p class="text-uppercase text-primary fw-bold mb-2">Kategori</p>
+                        <h4 class="mb-3">@Model.Category?.CategoryName</h4>
+                        <p class="mb-4">Koleksiyonumuzdaki diğer projelerle birlikte benzer tasarım dili ve malzeme detaylarıyla geliştirilmiştir.</p>
+                    </div>
+                    <div>
+                        <a href="/#projeler" class="btn btn-outline-primary w-100 py-3 mb-3"><i class="fa fa-arrow-left me-2"></i>Projeler sayfasına dön</a>
+                        <a href="/Contact" class="btn btn-primary w-100 py-3"><i class="fa fa-phone-alt me-2"></i>Proje hakkında iletişime geç</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

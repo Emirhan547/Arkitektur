@@ -52,7 +52,7 @@ namespace Arkitektur.Business.Services.ProjectServices
 
         public async  Task<BaseResult<ResultProjectDto>> GetByIdAsync(int id)
         {
-            var values = await _repository.GetByIdAsync(id);
+            var values = await _repository.GetByIdWithCategoryAsync(id);
             if (values is null)
             {
                 return BaseResult<ResultProjectDto>.Fail("Project Not Found");

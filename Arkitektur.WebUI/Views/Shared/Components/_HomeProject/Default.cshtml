@@ -7,7 +7,7 @@
     int count = 0;
     int count2 = 0;
 }
-<div class="container-xxl project py-5">
+<div class="container-xxl project py-5" id="projeler">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <h4 class="section-title">Projelerimiz</h4>
@@ -48,7 +48,7 @@
                                         <p><i class="fa fa-check text-primary me-3"></i>@project.Item1</p>
                                         <p><i class="fa fa-check text-primary me-3"></i>@project.Item2</p>
                                         <p><i class="fa fa-check text-primary me-3"></i>@project.Item3</p>
-                                        <a href="#" class="btn btn-primary py-3 px-5 mt-3">Devamını Gör</a>
+                                        <a asp-controller="Project" asp-action="Details" asp-route-id="@project.Id" class="btn btn-primary py-3 px-5 mt-3">Devamını Gör</a>
                                     </div>
                                 </div>
                             </div>

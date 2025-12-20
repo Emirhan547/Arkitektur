@@ -21,5 +21,11 @@ namespace Arkitektur.DataAccess.Repositories.ProjectRepositories
                 .Include(x => x.Category)
                 .ToListAsync();
         }
+        public async Task<Project?> GetByIdWithCategoryAsync(int id)
+        {
+            return await Context.Set<Project>()
+                .Include(x => x.Category)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

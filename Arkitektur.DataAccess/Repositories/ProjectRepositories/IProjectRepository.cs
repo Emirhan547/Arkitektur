@@ -11,5 +11,6 @@ namespace Arkitektur.DataAccess.Repositories.ProjectRepositories
     public interface IProjectRepository:IGenericRepository<Project>
     {
         Task<List<Project>> GetProjectsWithCategoriesAsync();
+        Task<Project?> GetByIdWithCategoryAsync(int id);
     }
 }
